@@ -27,11 +27,11 @@
 .stroke-text {
   -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
 }
+
+/* This ensures that when we tell the browser to jump, it doesn't try to animate it */
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto !important;
 }
-
-
 /* This ensures sections take up at least the full height of the screen */
 section {
   scroll-margin-top: 60px; /* This prevents the navbar from covering the section title */
@@ -45,3 +45,4 @@ section {
   position: relative;
   overflow: hidden;
 }
+

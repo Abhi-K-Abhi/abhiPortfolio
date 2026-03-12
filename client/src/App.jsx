@@ -11,6 +11,8 @@ const smoothTransition = {
 };
 
 function App() {
+
+  
   const [profile, setProfile] = useState(null)
 
 
@@ -21,6 +23,20 @@ function App() {
 
 
   const [copied, setCopied] = useState(false);
+
+  const [formData, setFormData] = useState({ 
+    name: '', 
+    email: '', 
+    message: '' 
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
 
 
   const copyEmail = () => {
@@ -126,24 +142,84 @@ function App() {
               key={item}
               whileHover={{ scale: 1.15, y: -1 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => {
-                const el = document.getElementById(item);
-                if (el) el.scrollIntoView({ behavior: 'smooth' });
-                setActiveSection(item);
-              }}
+onClick={() => {
+  const el = document.getElementById(item);
+  if (el) {
+    // 1. Calculate the absolute position from the top of the page
+    const offset = 80; // Space for your fixed navbar
+    const elementPosition = el.getBoundingClientRect().top + window.pageYOffset;
+    const offsetPosition = elementPosition - offset;
+
+    // 2. The "Warp": Using 'instant' or 'auto' kills the sliding animation
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'instant' // Some browsers use 'auto', 'instant' is explicit for no-scroll
+    });
+  }
+  // 3. Update the Blue Pill state
+  setActiveSection(item);
+}}
               className={`relative px-6 py-2.5 text-[12px] font-black uppercase tracking-[0.15em] transition-colors duration-300 ${
                 activeSection === item 
                   ? 'text-white' 
                   : 'text-slate-300 hover:text-white'
               }`}
             >
-              {/* THE SLIDING PILL */}
+              {/* THE SLIDING PILL ANIMATION*/}
               {activeSection === item && (
-                <motion.div 
-                  layoutId="activePill"
-                  className="absolute inset-0 bg-blue-600 rounded-full -z-10 shadow-[0_0_25px_rgba(37,99,235,0.5)]"
-                  transition={{ type: "spring", bounce: 0.25, duration: 0.6 }}
-                />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  {/* 1. THE 3D ORBITAL PILL */}
+                  <motion.div 
+                    layoutId="activePill"
+                    animate={{
+                      // The "Dive and Slam" Path
+                      y: [0, 100, -100, 0],
+                      scale: [1, 0.4, 1.8, 1],
+                      opacity: [1, 0.7, 0.7, 1],
+                      rotateX: [0, 45, -45, 0], // Tilts as it orbits
+                    }}
+                    transition={{
+                      duration: 0.9,
+                      ease: "anticipate"
+                    }}
+                    className="absolute inset-0 bg-gradient-to-br from-blue-600 to-indigo-900 rounded-full -z-10 shadow-[0_0_50px_rgba(30,58,138,0.8)]"                  >
+                    {/* 2. INTERNAL GLOW (Visual depth) */}
+                    <div className="absolute inset-0 rounded-full bg-white/20 blur-sm" />
+                  </motion.div>
+
+                  {/* 3. THE XP IMPACT (Triggered by AnimatePresence) */}
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={`impact-${item}`}
+                      className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                    >
+                      {/* XP Text */}
+                      <motion.span
+                        initial={{ opacity: 0, y: 0, scale: 0.5 }}
+                        animate={{ 
+                          opacity: [0, 1, 0], 
+                          y: -60, 
+                          scale: [0.5, 1.5, 1],
+                          rotate: [0, -15, 0] 
+                        }}
+                        transition={{ duration: 0.9, delay: 0.6 }} // Delayed to hit when the orbit lands
+                        className="text-cyan-400 font-mono font-black text-[12px] tracking-tighter"
+                        style={{ textShadow: '0 0 15px rgba(20, 168, 190, 0.8)' }}
+                      >
+                        ''''''
+                        ''''''
+                      </motion.span>
+
+                      {/* Impact Ring */}
+                      <motion.div
+                        initial={{ scale: 0, opacity: 1 }}
+                        animate={{ scale: 2.5, opacity: 0 }}
+                        transition={{ duration: 0.5, delay: 0.7 }}
+                        className="absolute w-full h-full border-2 border-white/30 rounded-full"
+                      />
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
               )}
               {item}
             </motion.button>
@@ -188,8 +264,12 @@ function App() {
                 Download CV
               </a>
               <button 
-                onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}
-                className="px-10 py-5 bg-transparent border border-white/10 text-white font-black uppercase text-sm rounded-full hover:border-blue-500 hover:text-blue-500 transition-all"
+                onClick={() => {
+                  const el = document.getElementById('contact');
+                  if(el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'instant' });
+                  setActiveSection('contact');
+                }}                
+              className="px-10 py-5 bg-transparent border border-white/10 text-white font-black uppercase text-sm rounded-full hover:border-blue-500 hover:text-blue-500 transition-all"
               >
                 Let's Talk
               </button>
@@ -208,82 +288,82 @@ function App() {
         </section>
 
       {/* 3. EXPERIENCE SECTION */}
-      <section id="experience" className="min-h-screen w-full flex flex-col px-6 py-20">
-        {/* 1. Header - Now naturally sits at the top because we removed justify-center from section */}
-        <div className="max-w-7xl w-full mx-auto mb-12"> 
-          <div className="flex items-center gap-4">
-            <h2 className="text-5xl font-black tracking-tighter uppercase italic text-slate-800/50">
-              Experience
-            </h2>
-            <div className="h-[1px] flex-1 bg-slate-800/30" />
+      <section id="experience" className="min-h-screen w-full py-24 flex flex-col relative bg-transparent">
+        <div className="max-w-6xl w-full px-6 md:px-12 mx-auto">
+          <div className="flex flex-col mb-20">
+            <div className="flex items-center gap-4">
+              <h2 className="text-4xl font-black tracking-tighter uppercase italic text-slate-800">
+                Experience
+              </h2>
+              <div className="h-[1px] flex-1 bg-slate-800/50" />
+            </div>
           </div>
-        </div>
-
-        {/* 2. Grid Wrapper - Updated to grid-cols-2 for the 2x2 look */}
-        <div className="flex-1 flex items-center justify-center w-full max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-12 w-full"> 
-            {/* I increased gap to 12 to give them more breathing room */}
-            
-            {profile.experience.map((exp, index) => (
-              <motion.div
-                key={`exp-${index}`}
-                layoutId={`exp-${index}`}
-                transition={smoothTransition}
-                onClick={() => setActiveModal({ ...exp, type: 'experience', id: index })}
-                whileHover={{ y: -10, borderColor: "rgba(59, 130, 246, 0.5)", backgroundColor: "rgba(15, 23, 42, 0.8)" }}
-                
-                /* Increased min-h to [350px] or [400px] 
-                  The cards will now be much wider, filling the screen better.
-                */
-                className="relative overflow-hidden cursor-pointer p-12 min-h-[370px] flex flex-col justify-between bg-slate-900/40 border border-slate-800 rounded-[3.5rem] transition-all group backdrop-blur-sm"
-              >
-                {/* 1. CLIPPED NUMBER UI: White stroke normally, Blue on hover */}
-              <span 
-                className="absolute -right-4.5 -bottom-4 text-9xl font-black text-blue-500/[0.05] group-hover:text-blue-500/[0.1] transition-colors select-none z-0"
-              >
-                {String(index + 1).padStart(2, '0')}
-              </span>
-                <div>
-                  <span className="text-sm font-mono text-blue-500 uppercase tracking-widest font-bold">
-                    {exp.year}
-                  </span>
+          {/* 3.2 Grid Wrapper - Updated to grid-cols-2 for the 2x2 look */}
+          <div className="flex-1 flex items-center justify-center w-full max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-12 w-full"> 
+              {/* I increased gap to 12 to give them more breathing room */}
+              
+              {profile.experience.map((exp, index) => (
+                <motion.div
+                  key={`exp-${index}`}
+                  layoutId={`exp-${index}`}
+                  transition={smoothTransition}
+                  onClick={() => setActiveModal({ ...exp, type: 'experience', id: index })}
+                  whileHover={{ y: -10, borderColor: "rgba(59, 130, 246, 0.5)", backgroundColor: "rgba(15, 23, 42, 0.8)" }}
                   
-                  {/* Bigger titles for the bigger cards */}
-                  <h3 className="text-3xl font-bold mt-6 leading-tight text-white group-hover:text-blue-400 transition-colors">
-                    {exp.role}
-                  </h3>
-                  
-                  <p className="text-xl text-slate-400 mt-2 italic">
-                    {exp.company}
-                  </p>
+                  /* Increased min-h to [350px] or [400px] 
+                    The cards will now be much wider, filling the screen better.
+                  */
+                  className="relative overflow-hidden cursor-pointer p-12 min-h-[370px] flex flex-col justify-between bg-slate-900/40 border border-slate-800 rounded-[3.5rem] transition-all group backdrop-blur-sm"
+                >
+                  {/* 1. CLIPPED NUMBER UI: White stroke normally, Blue on hover */}
+                <span 
+                  className="absolute -right-4.5 -bottom-4 text-9xl font-black text-blue-500/[0.05] group-hover:text-blue-500/[0.1] transition-colors select-none z-0"
+                >
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                  <div>
+                    <span className="text-sm font-mono text-blue-500 uppercase tracking-widest font-bold">
+                      {exp.year}
+                    </span>
+                    
+                    {/* Bigger titles for the bigger cards */}
+                    <h3 className="text-3xl font-bold mt-6 leading-tight text-white group-hover:text-blue-400 transition-colors">
+                      {exp.role}
+                    </h3>
+                    
+                    <p className="text-xl text-slate-400 mt-2 italic">
+                      {exp.company}
+                    </p>
 
-                  {/* We can show slightly more text now if you want, 
-                      or keep line-clamp-2 for a very clean look */}
-                  <p className="mt-8 text-slate-500 text-base leading-relaxed line-clamp-3">
-                    {exp.desc}
-                  </p>
-                </div>
+                    {/* We can show slightly more text now if you want, 
+                        or keep line-clamp-2 for a very clean look */}
+                    <p className="mt-8 text-slate-500 text-base leading-relaxed line-clamp-3">
+                      {exp.desc}
+                    </p>
+                  </div>
 
-                <div className="mt-10 text-xs text-blue-400 font-bold uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 group-hover:translate-x-3 transition-all">
-                  Explore Contribution →
-                </div>
+                  <div className="mt-10 text-xs text-blue-400 font-bold uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 group-hover:translate-x-3 transition-all">
+                    Explore Contribution →
+                  </div>
 
-              </motion.div>
-            ))}
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* 4. PROJECTS GRID */}
-      <section id="projects" className="min-h-screen w-full py-24 flex flex-col items-center bg-transparent">
-        <div className="max-w-6xl w-full px-4">
-          
-          {/* 4.1 PROJECTS HEADING - Moved to top, matching Experience style */}
-          <div className="flex items-center gap-4 mb-12">
-            <h2 className="text-4xl font-black tracking-tighter uppercase italic text-slate-800">
-              Projects
-            </h2>
-            <div className="h-[1px] flex-1 bg-slate-800/50" />
+      <section id="projects" className="min-h-screen w-full py-24 flex flex-col relative bg-transparent">
+        <div className="max-w-6xl w-full px-6 md:px-12 mx-auto">
+          <div className="flex flex-col mb-20">
+            <div className="flex items-center gap-4">
+              <h2 className="text-4xl font-black tracking-tighter uppercase italic text-slate-800">
+                Projects
+              </h2>
+              <div className="h-[1px] flex-1 bg-slate-800/50" />
+            </div>
           </div>
 
           {/* 4.2 SKILLS MARQUEE - Positioned below heading */}
@@ -360,15 +440,15 @@ function App() {
       </section>
       
       {/* 5 EDUCATION SECTION */}
-      <section id="education" className="min-h-screen w-full py-24 flex flex-col justify-center relative bg-transparent">
-        <div className="max-w-6xl w-full px-4">
-          
-          {/* 5.1 EDUCATION HEADING */}
-          <div className="flex items-center gap-4 mb-20">
-                <h2 className="text-4xl font-black tracking-tighter uppercase italic text-slate-800">
-                  Education
-                </h2>
-                <div className="h-[1px] flex-1 bg-slate-800/50" />
+      <section id="education" className="min-h-screen w-full py-24 flex flex-col relative bg-transparent">
+        <div className="max-w-6xl w-full px-6 md:px-12 mx-auto">
+          <div className="flex flex-col mb-20">
+            <div className="flex items-center gap-4">
+              <h2 className="text-4xl font-black tracking-tighter uppercase italic text-slate-800">
+                Education
+              </h2>
+              <div className="h-[1px] flex-1 bg-slate-800/50" />
+            </div>
           </div>
 
           {/* 5.2 EDUCATION CARDS - Stacked Vertically */}
@@ -541,49 +621,68 @@ function App() {
 
             {/* RIGHT SIDE: The Sleek Form Card */}
             <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              className="bg-slate-900/40 backdrop-blur-xl p-8 md:p-10 rounded-[2.5rem] border border-slate-800/50 space-y-6 shadow-2xl relative overflow-hidden"
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              className="bg-slate-900/40 backdrop-blur-xl p-8 md:p-10 rounded-[2.5rem] border border-slate-800/50 shadow-2xl relative overflow-hidden"
             >
-              {/* Subtle background glow for the card */}
+              {/* Subtle background glow */}
               <div className="absolute -top-24 -right-24 w-48 h-48 bg-blue-500/10 blur-[80px] pointer-events-none" />
 
-              <div className="space-y-5">
-                <div className="group">
-                  <label className="text-[10px] font-bold text-slate-600 uppercase tracking-widest ml-1">Full Name</label>
+              <form className="space-y-6 relative z-10" onSubmit={(e) => e.preventDefault()}>
+                
+                {/* Full Name Group */}
+                <div className="flex flex-col gap-2">
+                  <label className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] ml-1">
+                    Full Name
+                  </label>
                   <input 
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
                     type="text" 
                     placeholder="John Doe" 
-                    className="w-full mt-2 bg-slate-950/40 border border-slate-800/80 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-blue-500/50 transition-all placeholder:text-slate-800"
+                    className="w-full bg-slate-950/60 border border-slate-800 rounded-2xl px-6 py-4 text-white placeholder:text-slate-700 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/20 transition-all"
                   />
                 </div>
 
-                <div className="group">
-                  <label className="text-[10px] font-bold text-slate-600 uppercase tracking-widest ml-1">Email Address</label>
+                {/* Email Group */}
+                <div className="flex flex-col gap-2">
+                  <label className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] ml-1">
+                    Email Address
+                  </label>
                   <input 
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
                     type="email" 
                     placeholder="hello@work.com" 
-                    className="w-full mt-2 bg-slate-950/40 border border-slate-800/80 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-blue-500/50 transition-all placeholder:text-slate-800"
+                    className="w-full bg-slate-950/60 border border-slate-800 rounded-2xl px-6 py-4 text-white placeholder:text-slate-700 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/20 transition-all"
                   />
                 </div>
 
-                <div className="group">
-                  <label className="text-[10px] font-bold text-slate-600 uppercase tracking-widest ml-1">Message</label>
+                {/* Message Group */}
+                <div className="flex flex-col gap-2">
+                  <label className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] ml-1">
+                    Message
+                  </label>
                   <textarea 
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
                     rows="4"
                     placeholder="What's on your mind?" 
-                    className="w-full mt-2 bg-slate-950/40 border border-slate-800/80 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-blue-500/50 transition-all placeholder:text-slate-800 resize-none"
+                    className="w-full bg-slate-950/60 border border-slate-800 rounded-2xl px-6 py-4 text-white placeholder:text-slate-700 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/20 transition-all resize-none"
                   ></textarea>
                 </div>
-              </div>
 
-              <motion.button 
-                whileHover={{ scale: 1.02, backgroundColor: '#3b82f6' }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full py-5 bg-blue-600 text-white font-black uppercase tracking-[0.2em] rounded-2xl shadow-[0_20px_40px_-10px_rgba(37,99,235,0.3)] transition-all"
-              >
-                Send Message
-              </motion.button>
+                <motion.button 
+                  whileHover={{ scale: 1.02, backgroundColor: '#2563eb' }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full py-5 bg-blue-600 text-white font-black uppercase tracking-[0.2em] rounded-2xl shadow-[0_20px_40px_-10px_rgba(37,99,235,0.3)] transition-all"
+                >
+                  Send Message
+                </motion.button>
+              </form>
             </motion.div>
           </div>
 
@@ -632,8 +731,6 @@ function App() {
           </footer>
         </div>
       </section>
-
-
 
       {/* PASTE THE BUTTON CODE HERE */}
       <AnimatePresence>
