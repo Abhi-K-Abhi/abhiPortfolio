@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+/* Custom Scrollbar for the Modal */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 10px;
+  margin-block: 20px; /* Gives some padding at top/bottom */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(59, 130, 246, 0.3); /* Soft Blue */
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(59, 130, 246, 0.6); /* Brighter on hover */
+}
+
+/* .stroke-text {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+  text-shadow: none;
+} */
+.stroke-text {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
+}
+html {
+  scroll-behavior: smooth;
+}
+
+
+/* This ensures sections take up at least the full height of the screen */
+section {
+  scroll-margin-top: 60px; /* This prevents the navbar from covering the section title */
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Vertical centering */
+  align-items: center;     /* Horizontal centering */
+  padding: 80px 20px;      /* Space for the fixed navbar */
+  position: relative;
+  overflow: hidden;
+}
