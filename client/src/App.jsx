@@ -22,6 +22,20 @@ function App() {
 
   const [copied, setCopied] = useState(false);
 
+  const [formData, setFormData] = useState({ 
+    name: '', 
+    email: '', 
+    message: '' 
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
 
   const copyEmail = () => {
     navigator.clipboard.writeText(profile.contact.email);
@@ -541,49 +555,68 @@ function App() {
 
             {/* RIGHT SIDE: The Sleek Form Card */}
             <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              className="bg-slate-900/40 backdrop-blur-xl p-8 md:p-10 rounded-[2.5rem] border border-slate-800/50 space-y-6 shadow-2xl relative overflow-hidden"
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              className="bg-slate-900/40 backdrop-blur-xl p-8 md:p-10 rounded-[2.5rem] border border-slate-800/50 shadow-2xl relative overflow-hidden"
             >
-              {/* Subtle background glow for the card */}
+              {/* Subtle background glow */}
               <div className="absolute -top-24 -right-24 w-48 h-48 bg-blue-500/10 blur-[80px] pointer-events-none" />
 
-              <div className="space-y-5">
-                <div className="group">
-                  <label className="text-[10px] font-bold text-slate-600 uppercase tracking-widest ml-1">Full Name</label>
+              <form className="space-y-6 relative z-10" onSubmit={(e) => e.preventDefault()}>
+                
+                {/* Full Name Group */}
+                <div className="flex flex-col gap-2">
+                  <label className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] ml-1">
+                    Full Name
+                  </label>
                   <input 
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
                     type="text" 
                     placeholder="John Doe" 
-                    className="w-full mt-2 bg-slate-950/40 border border-slate-800/80 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-blue-500/50 transition-all placeholder:text-slate-800"
+                    className="w-full bg-slate-950/60 border border-slate-800 rounded-2xl px-6 py-4 text-white placeholder:text-slate-700 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/20 transition-all"
                   />
                 </div>
 
-                <div className="group">
-                  <label className="text-[10px] font-bold text-slate-600 uppercase tracking-widest ml-1">Email Address</label>
+                {/* Email Group */}
+                <div className="flex flex-col gap-2">
+                  <label className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] ml-1">
+                    Email Address
+                  </label>
                   <input 
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
                     type="email" 
                     placeholder="hello@work.com" 
-                    className="w-full mt-2 bg-slate-950/40 border border-slate-800/80 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-blue-500/50 transition-all placeholder:text-slate-800"
+                    className="w-full bg-slate-950/60 border border-slate-800 rounded-2xl px-6 py-4 text-white placeholder:text-slate-700 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/20 transition-all"
                   />
                 </div>
 
-                <div className="group">
-                  <label className="text-[10px] font-bold text-slate-600 uppercase tracking-widest ml-1">Message</label>
+                {/* Message Group */}
+                <div className="flex flex-col gap-2">
+                  <label className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] ml-1">
+                    Message
+                  </label>
                   <textarea 
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
                     rows="4"
                     placeholder="What's on your mind?" 
-                    className="w-full mt-2 bg-slate-950/40 border border-slate-800/80 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-blue-500/50 transition-all placeholder:text-slate-800 resize-none"
+                    className="w-full bg-slate-950/60 border border-slate-800 rounded-2xl px-6 py-4 text-white placeholder:text-slate-700 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/20 transition-all resize-none"
                   ></textarea>
                 </div>
-              </div>
 
-              <motion.button 
-                whileHover={{ scale: 1.02, backgroundColor: '#3b82f6' }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full py-5 bg-blue-600 text-white font-black uppercase tracking-[0.2em] rounded-2xl shadow-[0_20px_40px_-10px_rgba(37,99,235,0.3)] transition-all"
-              >
-                Send Message
-              </motion.button>
+                <motion.button 
+                  whileHover={{ scale: 1.02, backgroundColor: '#2563eb' }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full py-5 bg-blue-600 text-white font-black uppercase tracking-[0.2em] rounded-2xl shadow-[0_20px_40px_-10px_rgba(37,99,235,0.3)] transition-all"
+                >
+                  Send Message
+                </motion.button>
+              </form>
             </motion.div>
           </div>
 
