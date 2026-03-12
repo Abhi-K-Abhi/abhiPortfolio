@@ -11,6 +11,8 @@ const smoothTransition = {
 };
 
 function App() {
+
+  
   const [profile, setProfile] = useState(null)
 
 
@@ -144,6 +146,9 @@ function App() {
                 const el = document.getElementById(item);
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
                 setActiveSection(item);
+                if (window.navigator.vibrate) {
+                  window.navigator.vibrate(10); // Subtle haptic tap
+                }
               }}
               className={`relative px-6 py-2.5 text-[12px] font-black uppercase tracking-[0.15em] transition-colors duration-300 ${
                 activeSection === item 
@@ -151,13 +156,61 @@ function App() {
                   : 'text-slate-300 hover:text-white'
               }`}
             >
-              {/* THE SLIDING PILL */}
+              {/* THE SLIDING PILL ANIMATION*/}
               {activeSection === item && (
-                <motion.div 
-                  layoutId="activePill"
-                  className="absolute inset-0 bg-blue-600 rounded-full -z-10 shadow-[0_0_25px_rgba(37,99,235,0.5)]"
-                  transition={{ type: "spring", bounce: 0.25, duration: 0.6 }}
-                />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  {/* 1. THE 3D ORBITAL PILL */}
+                  <motion.div 
+                    layoutId="activePill"
+                    animate={{
+                      // The "Dive and Slam" Path
+                      y: [0, 100, -100, 0],
+                      scale: [1, 0.4, 1.8, 1],
+                      opacity: [1, 0.7, 0.7, 1],
+                      rotateX: [0, 45, -45, 0], // Tilts as it orbits
+                    }}
+                    transition={{
+                      duration: 0.9,
+                      ease: "anticipate"
+                    }}
+                    className="absolute inset-0 bg-gradient-to-br from-blue-600 to-indigo-900 rounded-full -z-10 shadow-[0_0_50px_rgba(30,58,138,0.8)]"                  >
+                    {/* 2. INTERNAL GLOW (Visual depth) */}
+                    <div className="absolute inset-0 rounded-full bg-white/20 blur-sm" />
+                  </motion.div>
+
+                  {/* 3. THE XP IMPACT (Triggered by AnimatePresence) */}
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={`impact-${item}`}
+                      className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                    >
+                      {/* XP Text */}
+                      <motion.span
+                        initial={{ opacity: 0, y: 0, scale: 0.5 }}
+                        animate={{ 
+                          opacity: [0, 1, 0], 
+                          y: -60, 
+                          scale: [0.5, 1.5, 1],
+                          rotate: [0, -15, 0] 
+                        }}
+                        transition={{ duration: 0.9, delay: 0.6 }} // Delayed to hit when the orbit lands
+                        className="text-cyan-400 font-mono font-black text-[12px] tracking-tighter"
+                        style={{ textShadow: '0 0 15px rgba(20, 168, 190, 0.8)' }}
+                      >
+                        ''''''
+                        ''''''
+                      </motion.span>
+
+                      {/* Impact Ring */}
+                      <motion.div
+                        initial={{ scale: 0, opacity: 1 }}
+                        animate={{ scale: 2.5, opacity: 0 }}
+                        transition={{ duration: 0.5, delay: 0.7 }}
+                        className="absolute w-full h-full border-2 border-white/30 rounded-full"
+                      />
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
               )}
               {item}
             </motion.button>
@@ -666,6 +719,15 @@ function App() {
         </div>
       </section>
 
+{/* <svg className="hidden">
+  <defs>
+    <filter id="goo">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+      <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo" />
+      <feBlend in="SourceGraphic" in2="goo" />
+    </filter>
+  </defs>
+</svg> */}
 
 
       {/* PASTE THE BUTTON CODE HERE */}
