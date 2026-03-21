@@ -1,0 +1,87 @@
+import { useState, useEffect } from 'react';
+import { portfolioApi } from './api/client';
+import Navbar from './components/Navbar';
+import ScrollToTop from './components/ScrollToTop';
+import SystemLoader from './components/SystemLoader'; // Ensure this file exists in components/
+import Hero from './sections/Hero';
+import Experience from './sections/Experience';
+import Projects from './sections/Projects';
+import Education from './sections/Education';
+import Contact from './sections/Contact';
+
+function App() {
+  // Using an object for state keeps the data synchronized
+  const [data, setData] = useState({
+    profile: null,
+    projects: []
+  });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const initApp = async () => {
+      try {
+        // Parallel fetching for maximum performance
+        const [profileRes, projectsRes] = await Promise.all([
+          portfolioApi.getProfile(),
+          portfolioApi.getProjects()
+        ]);
+
+        setData({
+          profile: profileRes.data,
+          projects: projectsRes.data
+        });
+      } catch (err) {
+        console.error("System Boot Failure. Check Backend Connection:", err);
+      } finally {
+        // A slight delay (1.5s) ensures the loader animation 
+        // feels smooth even if the API responds instantly.
+        setTimeout(() => setLoading(false), 1500);
+      }
+    };
+
+    initApp();
+  }, []);
+
+  // Use the professional SystemLoader while waiting for FastAPI
+  if (loading || !data.profile) {
+    return <SystemLoader />;
+  }
+
+  return (
+    <div className="bg-slate-950 text-white selection:bg-blue-500/30 min-h-screen">
+      {/* 1. Global Utilities */}
+      <Navbar />
+      <ScrollToTop />
+
+      {/* 2. Structured Sections - Passing data via Props */}
+      <main>
+        <Hero profile={data.profile} />
+        
+        <Experience experiences={data.profile.experience || []} />
+        
+        <Projects projects={data.projects || []} />
+        
+        <Education education={data.profile.education || []} />
+        
+        <Contact contact={data.profile.contact} />
+      </main>
+
+      {/* 3. Global Footer */}
+      <footer className="py-20 bg-black border-t border-slate-900">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="text-[10px] font-mono text-slate-600 tracking-[0.5em]">
+            © 2026 ABHI PATEL | ENGINEERED FOR PERFORMANCE
+          </div>
+          
+          {data.profile.sports && (
+            <div className="text-[10px] font-mono text-blue-900 uppercase tracking-widest">
+              {data.profile.sports}
+            </div>
+          )}
+        </div>
+      </footer>
+    </div>
+  );
+}
+
+export default App;
