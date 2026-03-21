@@ -57,8 +57,8 @@ function App() {
       <main>
         <Hero profile={data.profile} />
         
-        <Experience experiences={data.profile.experience || []} />
-        
+        <Experience experiences={data.profile?.experience || []}  skills={data.profile?.skills || []} 
+/>       
         <Projects projects={data.projects || []} />
         
         <Education education={data.profile.education || []} />

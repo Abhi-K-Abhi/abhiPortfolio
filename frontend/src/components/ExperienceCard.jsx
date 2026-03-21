@@ -16,13 +16,13 @@ const ExperienceCard = ({ exp, onOpen }) => {
         stiffness: 500, // Higher stiffness = faster start
         damping: 30,    // Higher damping = less "wobble" at the end
         mass: 0.5       // Lower mass = moves lighter/faster
-      }}      
+      }}
+            
       // MATCHING THE PROJECT CARD STYLING
       className="group relative bg-slate-900/40 border border-slate-800 rounded-2xl p-8 cursor-pointer overflow-hidden transition-colors hover:bg-slate-900/60"
     >
       {/* The Glow Effect */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
-
       <div className="relative z-10 flex flex-col h-full">
         <div className="flex justify-between items-start mb-4">
           <span className="text-blue-500 font-mono text-[10px] tracking-[0.3em] uppercase">
