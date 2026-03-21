@@ -68,6 +68,9 @@ function App() {
 
   return (
     <div className="bg-slate-950 text-white selection:bg-blue-500/30 min-h-screen">
+
+      <LeaserScanner />
+      
       {/* 1. Global Utilities */}
       <Navbar />
       <ScrollToTop />
