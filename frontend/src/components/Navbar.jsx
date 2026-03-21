@@ -96,50 +96,58 @@ const Navbar = () => {
                 <span className="relative z-10">{link}</span>
 
                 {/* THE SLIDING PILL ANIMATION */}
-                {activeSection === item && (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    {/* 1. THE 3D ORBITAL PILL */}
-                    <motion.div 
-                      layoutId="activePill"
-                      animate={{
-                        y: [0, 60, -60, 0], // Adjusted depth for navbar height
-                        scale: [1, 0.6, 1.4, 1],
-                        opacity: [1, 0.8, 0.8, 1],
-                        rotateX: [0, 45, -45, 0],
-                      }}
-                      transition={{
-                        duration: 0.8,
-                        ease: "anticipate"
-                      }}
-                      className="absolute inset-0 bg-gradient-to-br from-blue-600 to-indigo-900 rounded-full -z-10 shadow-[0_0_30px_rgba(37,99,235,0.5)]"
-                    >
-                      <div className="absolute inset-0 rounded-full bg-white/10 blur-[2px]" />
-                    </motion.div>
+{/* THE SLIDING SQUARE-PILL ANIMATION */}
+{activeSection === item && (
+  <div className="absolute inset-0 flex items-center justify-center">
+    {/* 1. THE 3D ORBITAL SQUARE FRAME */}
+    <motion.div 
+      layoutId="activePill"
+      animate={{
+        // THE JUMPING EFFECT: 
+        y: [0, 50, -50, 0], 
+        scale: [1, 0.6, 1.3, 1],
+        opacity: [1, 0.8, 0.9, 1],
+        rotateX: [0, 45, -45, 0],
+      }}
+      transition={{
+        duration: 0.8,
+        ease: "anticipate"
+      }}
+      // CHANGED: rounded-xl for the Square/Rectangle shape
+      className="absolute inset-0 bg-gradient-to-br from-blue-600 to-indigo-900 rounded-xl -z-10 shadow-[0_0_30px_rgba(37,99,235,0.5)] border border-blue-400/30"
+    >
+      {/* Glossy inner layer for depth */}
+      <div className="absolute inset-0 rounded-xl bg-white/10 blur-[1px]" />
+      
+      {/* Corner Accents to emphasize the Square shape */}
+      <div className="absolute top-1 left-1 w-1 h-1 border-t border-l border-white/40" />
+      <div className="absolute bottom-1 right-1 w-1 h-1 border-b border-r border-white/40" />
+    </motion.div>
 
-                    {/* 2. THE IMPACT TEXT/EFFECT */}
-                    <AnimatePresence mode="wait">
-                      <motion.div
-                        key={`impact-${item}`}
-                        className="absolute inset-0 flex items-center justify-center pointer-events-none"
-                      >
-                        <motion.span
-                          initial={{ opacity: 0, y: 0, scale: 0.5 }}
-                          animate={{ 
-                            opacity: [0, 1, 0], 
-                            y: -40, 
-                            scale: [0.5, 1.2, 1],
-                            rotate: [0, -10, 0] 
-                          }}
-                          transition={{ duration: 0.6, delay: 0.4 }}
-                          className="text-cyan-400 font-mono font-black text-[10px]"
-                          style={{ textShadow: '0 0 10px rgba(34, 211, 238, 0.6)' }}
-                        >
-                          EXE
-                        </motion.span>
-                      </motion.div>
-                    </AnimatePresence>
-                  </div>
-                )}
+    {/* 2. THE IMPACT TEXT/EFFECT */}
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={`impact-${item}`}
+        className="absolute inset-0 flex items-center justify-center pointer-events-none"
+      >
+        <motion.span
+          initial={{ opacity: 0, y: 0, scale: 0.5 }}
+          animate={{ 
+            opacity: [0, 1, 0], 
+            y: -40, 
+            scale: [0.5, 1.2, 1],
+            rotate: [0, -10, 0] 
+          }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="text-cyan-400 font-mono font-black text-[10px]"
+          style={{ textShadow: '0 0-10px rgba(34, 211, 238, 0.6)' }}
+        >
+          EXE
+        </motion.span>
+      </motion.div>
+    </AnimatePresence>
+  </div>
+)}
               </a>
             );
           })}

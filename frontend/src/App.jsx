@@ -8,6 +8,7 @@ import Experience from './sections/Experience';
 import Projects from './sections/Projects';
 import Education from './sections/Education';
 import Contact from './sections/Contact';
+import LeaserScanner from './components/LeaserScanner';
 
 function App() {
   // Using an object for state keeps the data synchronized
@@ -46,6 +47,24 @@ function App() {
   if (loading || !data.profile) {
     return <SystemLoader />;
   }
+
+  function App() {
+  return (
+    <div className="bg-slate-950 min-h-screen relative">
+      {/* 1. Add the Scanner here */}
+      <LeaserScanner /> 
+
+      {/* 2. Your existing sections */}
+      <Navbar />
+      <Hero />
+      <Experience />
+      <Projects />
+      <Contact />
+    </div>
+  );
+}
+
+  
 
   return (
     <div className="bg-slate-950 text-white selection:bg-blue-500/30 min-h-screen">
