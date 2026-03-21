@@ -1,5 +1,23 @@
 @import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+@layer base {
+  body {
+    @apply bg-slate-950 text-slate-200 antialiased;
+  }
+  
+  /* This ensures all buttons/links have a base readable color */
+  a, button {
+    @apply text-slate-200 transition-all duration-300;
+  }
+}
+
+/* Custom contrast for those tiny mono labels */
+.font-mono {
+  @apply tracking-widest uppercase;
+}
 /* Custom Scrollbar for the Modal */
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;
@@ -27,6 +45,9 @@
 .stroke-text {
   -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
 }
+html {
+  scroll-behavior: smooth;
+}
 
 /* This ensures that when we tell the browser to jump, it doesn't try to animate it */
 html {
@@ -45,4 +66,3 @@ section {
   position: relative;
   overflow: hidden;
 }
-

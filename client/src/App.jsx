@@ -127,7 +127,7 @@ function App() {
 
   
   return (
-    <div className="min-h-screen bg-[#020617] text-slate-200 selection:bg-blue-500/30 overflow-x-hidden">
+    <div className="min-h-screen bg-[#020617] text-slate-200 selection:bg-blue-500/30 overflow-y-auto overflow-x-hidden">
       
       {/* 1.NavBar */}
       <motion.nav 
@@ -288,16 +288,16 @@ onClick={() => {
         </section>
 
       {/* 3. EXPERIENCE SECTION */}
-      <section id="experience" className="min-h-screen w-full py-24 flex flex-col relative bg-transparent">
-        <div className="max-w-6xl w-full px-6 md:px-12 mx-auto">
-          <div className="flex flex-col mb-20">
-            <div className="flex items-center gap-4">
-              <h2 className="text-4xl font-black tracking-tighter uppercase italic text-slate-800">
-                Experience
-              </h2>
-              <div className="h-[1px] flex-1 bg-slate-800/50" />
-            </div>
+    <section id="experience" className="min-h-screen w-full py-24 flex flex-col relative bg-transparent">
+      <div className="max-w-6xl w-full px-6 md:px-12 mx-auto">
+        <div className="flex flex-col mb-20">
+          <div className="flex items-center gap-4">
+            <h2 className="text-4xl font-black tracking-tighter uppercase italic text-slate-800">
+              Experience
+            </h2>
+            <div className="h-[1px] flex-1 bg-slate-800/50" />
           </div>
+        </div>
           {/* 3.2 Grid Wrapper - Updated to grid-cols-2 for the 2x2 look */}
           <div className="flex-1 flex items-center justify-center w-full max-w-6xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-12 w-full"> 
@@ -584,7 +584,7 @@ onClick={() => {
 
       {/* 7. CONTACT SECTION */}
       <section id="contact" className="min-h-screen w-full py-24 flex flex-col relative bg-transparent">
-        <div className="max-w-6xl w-full px-6 md:px-12">
+        <div className="max-w-6xl w-full px-6 md:px-12 mx-auto">
           {/* 6.1 HEADING - Now at the absolute top */}
           <div className="flex flex-col mb-20">
             <div className="flex items-center gap-4">
