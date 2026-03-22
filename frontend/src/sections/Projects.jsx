@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ProjectCard from '../components/ProjectCard';
+import DetailedModal from '../components/DetailedModal';
 // In Projects.jsx
 
 const Projects = ({ projects }) => {
@@ -28,43 +29,10 @@ const Projects = ({ projects }) => {
       {/* Detail Modal Layer */}
       <AnimatePresence>
         {selectedProject && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-xl"
-            onClick={() => setSelectedProject(null)}
-          >
-            <motion.div 
-              layoutId={`card-${selectedProject.id}`}
-              className="bg-slate-900 border border-slate-800 w-full max-w-2xl p-10 relative overflow-y-auto max-h-[90vh]"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button 
-                onClick={() => setSelectedProject(null)}
-                className="absolute top-6 right-6 text-slate-500 hover:text-white"
-              >
-                CLOSE [X]
-              </button>
-              
-              <h2 className="text-4xl font-bold mb-6">{selectedProject.title}</h2>
-              <div className="flex flex-wrap gap-2 mb-8">
-                {selectedProject.tech.map((t, i) => (
-                  <span key={i} className="text-xs font-mono text-blue-400 bg-blue-500/10 px-3 py-1 rounded">
-                    {t}
-                  </span>
-                ))}
-              </div>
-              
-              <ul className="space-y-4">
-                {selectedProject.points.map((point, i) => (
-                  <li key={i} className="text-slate-300 leading-relaxed flex gap-3">
-                    <span className="text-blue-500">•</span> {point}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          </motion.div>
+          <DetailedModal 
+            item={selectedProject} 
+            onClose={() => setSelectedProject(null)} 
+          />
         )}
       </AnimatePresence>
     </section>
