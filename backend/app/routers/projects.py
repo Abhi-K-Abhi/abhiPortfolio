@@ -41,7 +41,6 @@ async def get_projects():
                         "video_url": "https://www.youtube.com/embed/VIDEO_ID_HERE", 
                         "github_url": "https://github.com/Abhi-K-Abhi/",
                         "category": "Backend Architecture",
-                        "long_description": "A centralized hub designed to bridge the gap between various SaaS platforms, allowing teams to monitor tasks and communications in one place.",
                         "roadmap": [
                             "Step 1: OAuth2 Handshake Implementation",
                             "Step 2: Webhook integration for real-time sync",
@@ -65,7 +64,6 @@ async def get_projects():
                         "video_url": "https://www.youtube.com/embed/VIDEO_ID_HERE", 
                         "github_url": "https://github.com/Abhi-K-Abhi/",
                         "category": "Backend Architecture",
-                        "long_description": "A centralized hub designed to bridge the gap between various SaaS platforms, allowing teams to monitor tasks and communications in one place.",
                         "roadmap": [
                             "Step 1: OAuth2 Handshake Implementation",
                             "Step 2: Webhook integration for real-time sync",
@@ -89,7 +87,6 @@ async def get_projects():
                         "video_url": "https://www.youtube.com/embed/VIDEO_ID_HERE", 
                         "github_url": "https://github.com/Abhi-K-Abhi/",
                         "category": "Backend Architecture",
-                        "long_description": "A centralized hub designed to bridge the gap between various SaaS platforms, allowing teams to monitor tasks and communications in one place.",
                         "roadmap": [
                             "Step 1: OAuth2 Handshake Implementation",
                             "Step 2: Webhook integration for real-time sync",
@@ -113,7 +110,6 @@ async def get_projects():
                         "video_url": "https://www.youtube.com/embed/VIDEO_ID_HERE", 
                         "github_url": "https://github.com/Abhi-K-Abhi/",
                         "category": "Backend Architecture",
-                        "long_description": "A centralized hub designed to bridge the gap between various SaaS platforms, allowing teams to monitor tasks and communications in one place.",
                         "roadmap": [
                             "Step 1: OAuth2 Handshake Implementation",
                             "Step 2: Webhook integration for real-time sync",
@@ -136,7 +132,6 @@ async def get_projects():
                         "video_url": "https://www.youtube.com/embed/VIDEO_ID_HERE", 
                         "github_url": "https://github.com/Abhi-K-Abhi/",
                         "category": "Backend Architecture",
-                        "long_description": "A centralized hub designed to bridge the gap between various SaaS platforms, allowing teams to monitor tasks and communications in one place.",
                         "roadmap": [
                             "Step 1: OAuth2 Handshake Implementation",
                             "Step 2: Webhook integration for real-time sync",
@@ -160,7 +155,6 @@ async def get_projects():
                         "video_url": "https://www.youtube.com/embed/VIDEO_ID_HERE", 
                         "github_url": "https://github.com/Abhi-K-Abhi/",
                         "category": "Backend Architecture",
-                        "long_description": "A centralized hub designed to bridge the gap between various SaaS platforms, allowing teams to monitor tasks and communications in one place.",
                         "roadmap": [
                             "Step 1: OAuth2 Handshake Implementation",
                             "Step 2: Webhook integration for real-time sync",
@@ -169,7 +163,4 @@ async def get_projects():
                         "long_description": "This project focuses on identifying security risks in automated code deployments. By utilizing Large Language Models, we can predict potential failures before they hit production."
 
         }
-
-
-
     ]

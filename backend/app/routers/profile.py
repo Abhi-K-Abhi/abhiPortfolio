@@ -2,7 +2,7 @@ from fastapi import APIRouter
 
 router = APIRouter()
 
-@router.get("/profile") # Prefix "/api" will be added in main.py
+@router.get("/profile")
 async def get_profile():
     return {
         "name": "Abhi Patel",
@@ -34,8 +34,33 @@ async def get_profile():
                 "details": [
                     "Achieved a near-perfect CGPA of 9.85/10.0.",
                     "Led the Google Developer Student Club (GDSC) as Chapter Lead.",
-                    "Conducted technical workshops for 200+ students on Cloud and Android.",
                     "Ranked in the top 1% of the Computer Science department."
+                ]
+            },
+            {
+                "id": "edu-hsc",
+                "degree": "Higher Secondary (HSC)",
+                "major": "Science (PCM)",
+                "uni": "GSHSEB Board",
+                "year": "2016 - 2018",
+                "location": "Gujarat, India",
+                "cgpa": "85%",
+                "details": [
+                    "Focused on Physics, Chemistry, and Advanced Mathematics.",
+                    "Developed foundational analytical and problem-solving skills."
+                ]
+            },
+            {
+                "id": "edu-ssc",
+                "degree": "Secondary School (SSC)",
+                "major": "General Science",
+                "uni": "GSHSEB Board",
+                "year": "2014 - 2016",
+                "location": "Gujarat, India",
+                "cgpa": "91%",
+                "details": [
+                    "Graduated with distinction.",
+                    "Recognized for excellence in Mathematics and Science."
                 ]
             }
         ],
@@ -51,7 +76,7 @@ async def get_profile():
                 "year": "Dec, 2022 - 2023",
                 "role": "Associate Software Engineer",
                 "company": "Azilen Technologies",
-                "desc": "Developed secure ASP.NET & Java apps using SOLID principles. Integrated CI/CD pipelines to improve delivery speed.", # <--- ADD THIS COMMA
+                "desc": "Developed secure ASP.NET & Java apps using SOLID principles. Integrated CI/CD pipelines to improve delivery speed.",
                 "location": "Ahmedabad, India",
                 "skills_used": ["ASP.NET", "Java", "CI/CD", "SOLID"],
                 "highlights": [
@@ -64,19 +89,22 @@ async def get_profile():
                 "year": "Jun - Aug, 2022",
                 "role": "Full-Stack Developer (Intern)",
                 "company": "Suvidha Foundation",
-                "desc": "Led frontend using React.js and Figma. Managed MySQL database structures for production-ready interfaces."
+                "desc": "Led frontend using React.js and Figma. Managed MySQL database structures for production-ready interfaces.",
+                "location": "Ahmedabad, India"
             },
             {
                 "year": "May - Jul, 2021",
                 "role": "Backend Developer (Intern)",
                 "company": "Media Platforms",
-                "desc": "Developed Python-Django modules for relational datasets. Optimized complex SQL queries to validate data integrity."
+                "desc": "Developed Python-Django modules for relational datasets. Optimized complex SQL queries to validate data integrity.",
+                "location": "Ahmedabad, India"
             },
             {
                 "year": "June, 2021 - 2022",
                 "role": "GDSC Student Chapter Lead",
                 "company": "Google Developer Student Clubs",
-                "desc": "Managed 15+ cross-functional teams and led technical workshops for 200+ students on Cloud and Android."
+                "desc": "Managed 15+ cross-functional teams and led technical workshops for 200+ students on Cloud and Android.",
+                "location": "Ahmedabad, India"
             }
         ],
         "contact": {
