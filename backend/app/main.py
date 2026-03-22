@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-# We import the routers we just created from the local 'routers' folder
-from .routers import profile, projects 
+# Changed to absolute imports to fix the "Could not import module" error
+from app.routers import profile, projects 
 
 app = FastAPI(title="Abhi Patel Portfolio API")
 
@@ -27,3 +27,8 @@ async def health_check():
         "status": "online",
         "message": "Abhi Patel's Portfolio API is running in modular mode"
     }
+
+@app.get("/root")
+async def root():
+    """Fallback root route for layered mode verification."""
+    return {"message": "Portfolio API is running in Layered Mode"}
