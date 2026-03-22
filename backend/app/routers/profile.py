@@ -51,7 +51,14 @@ async def get_profile():
                 "year": "Dec, 2022 - 2023",
                 "role": "Associate Software Engineer",
                 "company": "Azilen Technologies",
-                "desc": "Developed secure ASP.NET & Java apps using SOLID principles. Integrated CI/CD pipelines to improve delivery speed."
+                "desc": "Developed secure ASP.NET & Java apps using SOLID principles. Integrated CI/CD pipelines to improve delivery speed.", # <--- ADD THIS COMMA
+                "location": "Ahmedabad, India",
+                "skills_used": ["ASP.NET", "Java", "CI/CD", "SOLID"],
+                "highlights": [
+                    "Architected secure backend modules for enterprise applications.",
+                    "Integrated automated CI/CD pipelines increasing deployment frequency.",
+                    "Applied SOLID principles to refactor legacy codebases."
+                ]
             },
             {
                 "year": "Jun - Aug, 2022",

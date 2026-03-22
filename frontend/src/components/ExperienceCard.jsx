@@ -44,7 +44,7 @@ const ExperienceCard = ({ exp, onOpen }) => {
         
         {/* Short Preview (Matches the Project Card paragraph style) */}
         <div className="text-slate-400 text-sm line-clamp-2 mb-6 flex-grow">
-          {Array.isArray(exp.description) ? exp.description[0] : exp.description}
+          {Array.isArray(exp.desc) ? exp.desc[0] : exp.desc}
         </div>
 
         <div className="text-blue-500 text-xs font-bold tracking-tighter flex items-center gap-2">
