@@ -8,12 +8,12 @@ const Education = ({ education = [] }) => {
   const [selectedEdu, setSelectedEdu] = useState(null);
 
   return (
-    <section id="education" className="py-24 bg-slate-950 border-t border-slate-900">
+    <section id="education" className="pt-0 pb-24 bg-slate-950 relative overflow-hidden">
       <SectionHeader title="Education" moduleHex="0x03" />
-      
       <div className="max-w-7xl mx-auto px-6">
+        {/* Same Gap (8) for uniformity */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">
-          {education && education.map((edu) => (
+          {education.map((edu) => (
             <EducationCard 
               key={edu.id} 
               edu={edu} 

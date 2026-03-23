@@ -170,18 +170,17 @@ const Experience = ({ experiences = [], skills = [] }) => {
   const [activeSkill, setActiveSkill] = useState(null);
 
   return (
-    <section id="experience" className="py-24 bg-slate-950 relative overflow-hidden">
+    <section id="experience" className="pt-0 pb-24 bg-slate-950 relative overflow-hidden">
       <SectionHeader title="Experience" moduleHex="0x01" />
 
-      {/* 1. EXPERIENCE CARDS SECTION */}
       <div className="max-w-7xl mx-auto px-6">
-        {/* FIXED: Removed the double nested grid that was in your version */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-32">
-          {experiences.map((exp) => (
-            <ExperienceCard
-              key={`${exp.company}-${exp.role}`}
-              exp={exp}
-              onOpen={() => setSelectedExp(exp)}
+        {/* Same Gap (8) as Projects for uniformity */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">
+          {experiences.map((exp, index) => (
+            <ExperienceCard 
+              key={index} 
+              exp={exp} 
+              onOpen={() => setSelectedExp(exp)} 
             />
           ))}
         </div>
