@@ -3,19 +3,13 @@ import { motion } from 'framer-motion';
 const EducationCard = ({ edu, onOpen }) => {
   return (
     <motion.div 
-      // This ID must match the one in the Modal for the "zoom" effect
-      layoutId={`edu-${edu.id}`} 
+      layoutId={`edu-card-${edu.id}`}
       onClick={onOpen}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       whileHover={{ y: -10, scale: 1.02 }} 
-      transition={{ 
-        type: "spring", 
-        stiffness: 500, 
-        damping: 30, 
-        mass: 0.5 
-      }}
+      transition={{ type: "spring", stiffness: 500, damping: 30, mass: 0.5 }}
       className="group relative bg-slate-900/40 border border-slate-800 rounded-2xl p-8 cursor-pointer overflow-hidden transition-colors hover:bg-slate-900/60"
     >
       <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
@@ -43,8 +37,8 @@ const EducationCard = ({ edu, onOpen }) => {
           {edu.major} • {edu.location}
         </div>
 
-        <div className="text-blue-500 text-xs font-bold tracking-tighter flex items-center gap-2 uppercase">
-          View Academic Log 
+        <div className="text-blue-500 text-xs font-bold tracking-tighter flex items-center gap-2">
+          ACADEMIC RECORDS
           <span className="group-hover:translate-x-1 transition-transform">→</span>
         </div>
       </div>
