@@ -70,17 +70,27 @@ const Education = ({ education = [], skills = [] }) => {
       </motion.div>
 
       {/* 3. THE CRISP MOON (Half Phase) */}
-<motion.div 
-  initial={{ opacity: 0 }}
-  animate={{ opacity: 0.5 }}
-  whileHover={{ scale: 1.1, opacity: 0.8 }}
-  style={{ left: '65%', transform: 'translateX(-50%)' }} 
-  className="absolute top-10 w-35 h-35 rounded-full shadow-[-52px_0px_0_0_#cbd5e1] pointer-events-auto cursor-pointer filter blur-[0.5px] transition-all duration-500 hover:shadow-[-55px_0px_30px_0_rgba(203,213,225,0.4)]"
-/>
+      <motion.div 
+        initial={{ 
+          opacity: 0, 
+          left: '70%', 
+          x: '-50%' 
+        }}
+        animate={{ 
+          opacity: 0.5, 
+          left: '70%', 
+          x: '-50%' 
+        }}
+        whileHover={{ 
+          scale: 1.1, 
+          opacity: 0.8 
+        }}
+        // We keep the static layout properties in style
+        style={{ position: 'absolute' }} 
+        className="absolute top-10 w-35 h-35 rounded-full shadow-[-52px_0px_0_0_#E9D5FF] pointer-events-auto cursor-pointer filter blur-[0.5px] transition-all duration-500 hover:shadow-[-55px_0px_30px_0_rgba(203,213,225,0.4)]"
+      />
       {/* --- NIGHT EFFECT LAYERS END --- */}
-
       <SectionHeader title="Education" moduleHex="0x03" />
-      
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">
           {education.map((edu) => (
@@ -93,11 +103,11 @@ const Education = ({ education = [], skills = [] }) => {
         </div>
       </div>
 
-      {/* 2. THE INTERACTIVE SKILL-SCANNER GAME */}
-      <div className="relative z-10 mt-0 mb-10 w-full overflow-visible">
+      {/* 2. THE INTERACTIVE SKILL-SCANNER GAME - PINNED TO BOTTOM */}
+      <div className="absolute bottom-[75px] left-0 w-full z-20 overflow-visible">
         <div className="max-w-7xl mx-auto px-6 mb-6 flex justify-between items-end font-mono">
           <div className="flex flex-col gap-1">
-            <span className="text-[10px] text-purple-300 tracking-[0.4em] uppercase">Tactical_Overlay_v4.2</span>
+            <span className="text-[11px] text-purple-300 tracking-[0.4em] uppercase">Tactical_Overlay</span>
             <div className="flex items-center gap-3">
               <div className={`w-2 h-2 rounded-full ${isHovered ? 'bg-green-500 animate-pulse' : 'bg-red-500'}`} />
               <span className=" text-xs text-slate-400 tracking-widest">
@@ -105,8 +115,8 @@ const Education = ({ education = [], skills = [] }) => {
               </span>
             </div>
           </div>
-          <div className="text-[10px] text-purple-200 text-right hidden md:block">
-            COORDINATES: [45.5017° N, 73.5673° W]<br />
+          <div className="text-[11px] text-purple-200 text-right hidden md:block">
+            COORDINATES: [23.0736° N, 72.5702° E]<br />
             DECRYPT_STRENGTH: 94.2%
           </div>
         </div>
@@ -160,12 +170,14 @@ const Education = ({ education = [], skills = [] }) => {
           </motion.div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 mt-8 opacity-20 flex justify-between items-center">
+        <div className="max-w-7xl mx-auto px-6 mt-8 opacity-35 flex justify-between items-center">
           <div className="h-[1px] w-1/4 bg-gradient-to-r from-purple-500 to-transparent" />
-          <span className="font-mono text-[8px] tracking-[1em] text-purple-300/50 uppercase">Interactive_Skill_Core_v2</span>
-          <div className="h-[1px] w-1/4 bg-gradient-to-l from-purple-500 to-transparent" />
+          <span className="font-mono text-[11px] tracking-[1em] text-purple-100 uppercase">Interactive_Skill_Core</span>
+          <div className="h-[1px] w-1/4 bg-gradient-to-l from-purple-300 to-transparent" />
         </div>
       </div>
+
+
 
       <AnimatePresence>
         {selectedEdu && (

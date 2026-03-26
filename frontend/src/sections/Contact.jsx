@@ -82,13 +82,26 @@ const Contact = ({ contact }) => {
       </motion.div>
 
       {/* 3. THE CRISP MOON (Crescent Phase) */}
-<motion.div 
-  initial={{ opacity: 0 }}
-  animate={{ opacity: 0.5 }}
-  whileHover={{ scale: 1.1, opacity: 0.8 }}
-  style={{ left: '95%', transform: 'translateX(-50%)' }} 
-  className="absolute top-50 w-35 h-35 rounded-full shadow-[-24px_0px_0_0_#cbd5e1] pointer-events-auto cursor-pointer filter blur-[0.5px] transition-all duration-500 hover:shadow-[-26px_0px_25px_0_rgba(203,213,225,0.4)]"
-/>
+      <motion.div 
+        // Defining 'left' and 'x' here locks the position from the very first frame
+        initial={{ 
+          opacity: 0, 
+          left: '95%', 
+          x: '-50%' 
+        }}
+        animate={{ 
+          opacity: 0.5, 
+          left: '95%', 
+          x: '-50%' 
+        }}
+        whileHover={{ 
+          scale: 1.1, 
+          opacity: 0.8 
+        }}
+        // Static layout properties only
+        style={{ position: 'absolute' }} 
+        className="absolute top-100 w-35 h-35 rounded-full shadow-[-24px_0px_0_0_#E9D5FF] pointer-events-auto cursor-pointer filter blur-[0.5px] transition-all duration-500 hover:shadow-[-26px_0px_25px_0_rgba(203,213,225,0.4)]"
+      />
 
       {/* 4. CONTENT LAYER */}
       <div className="relative z-10 flex-grow flex items-center justify-center px-6">
@@ -101,7 +114,7 @@ const Contact = ({ contact }) => {
               transition={{ duration: 0.8 }}
             >
               <h2 className="text-7xl md:text-8xl font-black tracking-tighter leading-none text-white">
-                LET'S <br /> <span className="text-purple-500">CONNECT.</span>
+                LET'S <br /> <span className="text-purple-600">CONNECT.</span>
               </h2>
             </motion.div>
             
@@ -117,12 +130,12 @@ const Contact = ({ contact }) => {
                 </button>
 
                 <div className="flex gap-4">
-                  <button onClick={copyEmail} className="px-8 py-3 bg-purple-950/30 border border-purple-500/20 backdrop-blur-md text-slate-300 font-mono text-[10px] tracking-widest rounded-full hover:bg-purple-500/20 transition-all">
+                  <button onClick={copyEmail} className="px-8 py-3 bg-purple-950/30 border border-purple-500/20 backdrop-blur-md text-slate-300 font-mono text-[10px] tracking-widest rounded-full hover:bg-purple-700 transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:text-purple-200"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
                     {copied ? "COPIED" : ""}
                   </button>
                   
-                   <a href={`mailto:${contact.email}`} className="p-3 bg-purple-600 text-white rounded-full hover:bg-purple-500 shadow-lg shadow-purple-900/40 transition-all">
+                   <a href={`mailto:${contact.email}`} className="p-3 bg-purple-900 text-white rounded-full hover:bg-purple-700 shadow-lg shadow-purple-900/40 transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
                   </a>
                 </div>
@@ -133,11 +146,11 @@ const Contact = ({ contact }) => {
           {/* Form with Dark Glass Effect */}
           <form className="space-y-4 w-full bg-black/40 p-10 rounded-[2rem] backdrop-blur-2xl border border-white/5 shadow-2xl">
             <div className="grid md:grid-cols-2 gap-4">
-              <input type="text" placeholder="NAME" className="bg-white/5 border border-white/10 p-4 focus:border-purple-500 outline-none font-mono text-xs text-white rounded-xl transition-colors" />
-              <input type="email" placeholder="EMAIL" className="bg-white/5 border border-white/10 p-4 focus:border-purple-500 outline-none font-mono text-xs text-white rounded-xl transition-colors" />
+              <input type="text" placeholder="NAME" className="bg-white/5 border border-white/10 p-4 focus:border-purple-600 outline-none font-mono text-xs text-white rounded-xl transition-colors" />
+              <input type="email" placeholder="EMAIL" className="bg-white/5 border border-white/10 p-4 focus:border-purple-600 outline-none font-mono text-xs text-white rounded-xl transition-colors" />
             </div>
-            <textarea placeholder="MESSAGE" rows="4" className="w-full bg-white/5 border border-white/10 p-4 focus:border-purple-500 outline-none font-mono text-xs text-white rounded-xl resize-none transition-colors"></textarea>
-            <button className="w-full bg-purple-600 hover:bg-purple-500 py-4 font-black text-white text-[11px] tracking-[0.4em] transition-all rounded-xl shadow-lg shadow-purple-900/40">
+            <textarea placeholder="MESSAGE" rows="4" className="w-full bg-white/5 border border-white/10 p-4 focus:border-purple-600 outline-none font-mono text-xs text-white rounded-xl resize-none transition-colors"></textarea>
+            <button className="w-full bg-purple-900 hover:bg-purple-700 py-4 font-black text-white text-[12px] tracking-[0.4em] transition-all rounded-xl shadow-lg shadow-purple-900/40">
               SEND MESSAGE
             </button>
           </form>
