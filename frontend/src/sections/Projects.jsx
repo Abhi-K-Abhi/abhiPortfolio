@@ -2,8 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ProjectCard from '../components/ProjectCard';
 import DetailedModal from '../components/DetailedModal';
-import SectionHeader from '../components/SectionHeader'; // Import it at top
-// In Projects.jsx
+import SectionHeader from '../components/SectionHeader';
 
 const Projects = ({ projects }) => {
   const [selectedProject, setSelectedProject] = useState(null);

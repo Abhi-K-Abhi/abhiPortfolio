@@ -27,20 +27,26 @@ const Experience = ({ experiences = []}) => {
       {/* 3. DETAIL MODAL */}
       <AnimatePresence>
         {selectedExp && (
-            <DetailedModal
-              // CRITICAL: This must match the layoutId in ExperienceCard.jsx
-              layoutId={`card-${selectedExp.company}`} 
-              item={{
-                ...selectedExp,
-                title: selectedExp.role,
-                category: selectedExp.company,
-                points: selectedExp.highlights || [selectedExp.desc],
-                tech: selectedExp.skills_used || [],
-                roadmap: ["Project Discovery", "Execution Phase", "Deployment & Optimization"]
-              }}
-              onClose={() => setSelectedExp(null)}
-            />
-          )}
+          <DetailedModal
+            // Use the company name as the unique ID for the animation
+            layoutId={`card-${selectedExp.company}`} 
+            item={{
+              ...selectedExp,
+                  title: selectedExp.role,
+                  category: selectedExp.company,
+                  // Ensure these fields are passed through:
+                  image_url: selectedExp.image_url,
+                  data_flow: selectedExp.data_flow,
+                  depth_ride: selectedExp.depth_ride,
+                  impact_metrics: selectedExp.impact_metrics,
+                  // fallback for existing fields
+                  points: selectedExp.detailed_points || selectedExp.highlights,
+                  tech: selectedExp.tech_stack || [],
+                  roadmap: selectedExp.roadmap || []
+            }}
+            onClose={() => setSelectedExp(null)}
+          />
+        )}
       </AnimatePresence>
     </section>
   );

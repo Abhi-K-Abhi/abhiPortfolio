@@ -14,7 +14,7 @@ const ProjectCard = ({ project, onClick }) => {
         damping: 30,    // Higher damping = less "wobble" at the end
         mass: 0.5       // Lower mass = moves lighter/faster
       }}
-      className="group relative bg-slate-900/40 border border-slate-800 rounded-2xl overflow-hidden"
+      className="group relative bg-slate-900/40 border border-slate-800 rounded-2xl p-2 overflow-hidden"
       layoutId={`card-${project.id}`}
       onClick={() => onClick(project)}
       // className="group relative bg-slate-900/50 border border-slate-800 p-8 cursor-pointer hover:border-blue-500/50 transition-all duration-500"

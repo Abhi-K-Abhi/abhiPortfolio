@@ -19,7 +19,7 @@ const ExperienceCard = ({ exp, onOpen }) => {
       }}
             
       // MATCHING THE PROJECT CARD STYLING
-      className="group relative bg-slate-900/40 border border-slate-800 rounded-2xl p-8 cursor-pointer overflow-hidden transition-colors hover:bg-slate-900/60"
+      className="group relative bg-slate-900/40 border border-slate-800 rounded-2xl p-2 cursor-pointer overflow-hidden transition-colors hover:bg-slate-900/60"
     >
       {/* The Glow Effect */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
