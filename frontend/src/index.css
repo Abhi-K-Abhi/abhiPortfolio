@@ -3,66 +3,76 @@
 @tailwind components;
 @tailwind utilities;
 
+/* --- 1. GLOBAL BASE STYLES --- */
 @layer base {
-  body {
-    @apply bg-slate-950 text-slate-200 antialiased;
+  :root {
+    --midnight-violet: #150123;
+    --obsidian-black: #000000;
   }
-  
-  /* This ensures all buttons/links have a base readable color */
+
+  html {
+    /* Set scroll behavior to auto as per your requirement */
+    scroll-behavior: auto !important;
+  }
+
+  body {
+    /* THE NEW GLOBAL BACKGROUND */
+    background: radial-gradient(circle at 50% 50%, var(--midnight-violet) 0%, var(--obsidian-black) 100%) fixed;
+    background-attachment: fixed;
+    
+    @apply text-slate-200 antialiased;
+    margin: 0;
+    padding: 0;
+  }
+
   a, button {
     @apply text-slate-200 transition-all duration-300;
   }
+
+  section {
+    scroll-margin-top: 60px;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 20px;
+    position: relative;
+    overflow: hidden;
+    /* Sections are now transparent so the global background shows through */
+    background: transparent !important;
+  }
 }
 
-/* Custom contrast for those tiny mono labels */
-.font-mono {
-  @apply tracking-widest uppercase;
-}
-/* Custom Scrollbar for the Modal */
-.custom-scrollbar::-webkit-scrollbar {
-  width: 6px;
-}
+/* --- 2. CUSTOM COMPONENTS & UTILITIES --- */
+@layer components {
+  /* Typography Enhancements */
+  .font-mono {
+    @apply tracking-widest uppercase;
+  }
 
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.02);
-  border-radius: 10px;
-  margin-block: 20px; /* Gives some padding at top/bottom */
-}
+  .stroke-text {
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
+  }
 
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(59, 130, 246, 0.3); /* Soft Blue */
-  border-radius: 10px;
-}
+  /* Custom Scrollbar for Modals */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
 
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(59, 130, 246, 0.6); /* Brighter on hover */
-}
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 10px;
+    margin-block: 20px;
+  }
 
-/* .stroke-text {
-  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
-  text-shadow: none;
-} */
-.stroke-text {
-  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
-}
-html {
-  scroll-behavior: smooth;
-}
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(59, 130, 246, 0.3);
+    border-radius: 10px;
+  }
 
-/* This ensures that when we tell the browser to jump, it doesn't try to animate it */
-html {
-  scroll-behavior: auto !important;
-}
-/* This ensures sections take up at least the full height of the screen */
-section {
-  scroll-margin-top: 60px; /* This prevents the navbar from covering the section title */
-  min-height: 100vh;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* Vertical centering */
-  align-items: center;     /* Horizontal centering */
-  padding: 80px 20px;      /* Space for the fixed navbar */
-  position: relative;
-  overflow: hidden;
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(59, 130, 246, 0.6);
+  }
 }
