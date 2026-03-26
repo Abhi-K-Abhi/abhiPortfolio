@@ -1,53 +1,3 @@
-// import { useState } from 'react';
-// import { motion, AnimatePresence } from 'framer-motion';
-// import ProjectCard from '../components/ProjectCard';
-// import DetailedModal from '../components/DetailedModal';
-// import SectionHeader from '../components/SectionHeader';
-
-// const Projects = ({ projects }) => {
-//   const [selectedProject, setSelectedProject] = useState(null);
-
-//   return (
-//     <section id="projects" className="pt-0 pb-24 bg-slate-950 relative overflow-hidden">
-//       {/* 1. NO EXTRA DIVS HERE - Just the header */}
-//       <SectionHeader title="Projects" moduleHex="0x02" />
-
-//       {/* 2. Standardized Grid Container */}
-//       <div className="max-w-7xl mx-auto px-6">
-//         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-//           {projects.map((project) => (
-//             <ProjectCard 
-//               key={project.id} 
-//               project={project} 
-//               onClick={setSelectedProject} 
-//             />
-//           ))}
-//         </div>
-//       </div>
-
-//       {/* Detail Modal Layer */}
-//       <AnimatePresence>
-//         {selectedProject && (
-//           <DetailedModal 
-//             item={selectedProject} 
-//             onClose={() => setSelectedProject(null)} 
-//           />
-//         )}
-//       </AnimatePresence>
-//     </section>
-//   );
-// };
-
-// export default Projects;
-
-
-
-
-
-
-
-
-
 import React, { useState } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion'; 
 import ProjectCard from '../components/ProjectCard';
@@ -118,14 +68,26 @@ const Projects = ({ projects = [] }) => {
       </motion.div>
 
       {/* 3. THE CRISP MOON (Phase 2: 2nd Quadrant - 25%) */}
-<motion.div 
-  initial={{ opacity: 0 }}
-  animate={{ opacity: 0.5 }}
-  whileHover={{ scale: 1.1, opacity: 0.8 }}
-  style={{ left: '35%', transform: 'translateX(-50%)' }} 
-  className="absolute top-10 w-35 h-35 rounded-full shadow-[-65px_0px_0_0_#cbd5e1] pointer-events-auto cursor-pointer filter blur-[0.5px] transition-all duration-500 hover:shadow-[-70px_0px_30px_0_rgba(203,213,225,0.4)]"
-/>
-
+      <motion.div 
+        // Defining position here prevents the browser from sliding it from 0 to 35%
+        initial={{ 
+          opacity: 0, 
+          left: '35%', 
+          x: '-50%' 
+        }}
+        animate={{ 
+          opacity: 0.5, 
+          left: '35%', 
+          x: '-50%' 
+        }}
+        whileHover={{ 
+          scale: 1.1, 
+          opacity: 0.8 
+        }}
+        // Keeping only non-animating layout properties in style
+        style={{ position: 'absolute' }} 
+        className="absolute top-10 w-35 h-35 rounded-full shadow-[-65px_0px_0_0_#E9D5FF] pointer-events-auto cursor-pointer filter blur-[0.5px] transition-all duration-500 hover:shadow-[-70px_0px_30px_0_rgba(203,213,225,0.4)]"
+      />
       {/* --- NIGHT EFFECT LAYERS END --- */}
 
       {/* CENTERED HEADER */}
