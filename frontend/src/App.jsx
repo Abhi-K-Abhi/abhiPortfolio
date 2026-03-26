@@ -160,7 +160,14 @@ function App() {
 
   // 4. Main Application UI
   return (
-    <div className="bg-slate-950 text-white selection:bg-blue-500/30 min-h-screen relative">
+      <div 
+        className="text-white selection:bg-blue-500/30 min-h-screen relative"
+        style={{
+          background: 'radial-gradient(circle at 50% 50%, #150123 0%, #000000 100%)',
+          backgroundAttachment: 'fixed', // This keeps the "glow" in the center of the screen while you scroll
+          backgroundSize: 'cover'
+        }}
+      >
       
       {/* Global Utilities */}
       <LeaserScanner />
@@ -191,7 +198,7 @@ function App() {
       </main>
 
       {/* Global Footer */}
-      <footer className="py-20 bg-black border-t border-slate-900">
+      {/* <footer className="py-20 bg-black border-t border-slate-900">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="text-[10px] font-mono text-slate-600 tracking-[0.5em]">
             © 2026 ABHI PATEL | ENGINEERED FOR PERFORMANCE
@@ -203,7 +210,7 @@ function App() {
             </div>
           )}
         </div>
-      </footer>
+      </footer> */}
     </div>
   );
 }

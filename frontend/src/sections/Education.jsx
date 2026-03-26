@@ -1,81 +1,87 @@
-// import React, { useState } from 'react';
-// import { AnimatePresence } from 'framer-motion';
-// import SectionHeader from '../components/SectionHeader';
-// import EducationCard from '../components/EducationCard';
-// import DetailedModal from '../components/DetailedModal';
-
-// const Education = ({ education = [] }) => {
-//   const [selectedEdu, setSelectedEdu] = useState(null);
-
-//   return (
-//     <section id="education" className="pt-0 pb-24 bg-slate-950 relative overflow-hidden">
-//       <SectionHeader title="Education" moduleHex="0x03" />
-//       <div className="max-w-7xl mx-auto px-6">
-//         {/* Same Gap (8) for uniformity */}
-//         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">
-//           {education.map((edu) => (
-//             <EducationCard 
-//               key={edu.id} 
-//               edu={edu} 
-//               onOpen={() => setSelectedEdu(edu)} 
-//             />
-//           ))}
-//         </div>
-//       </div>
-
-//       <AnimatePresence>
-//         {selectedEdu && (
-//             <DetailedModal 
-//               // CRITICAL: Matches the ID we will set in the EducationCard
-//               layoutId={`edu-${selectedEdu.id}`}
-//               item={{
-//                 ...selectedEdu,
-//                 title: selectedEdu.degree || "Degree Information",
-//                 category: selectedEdu.uni || "Institution",
-//                 points: selectedEdu.details || ["Curriculum details pending"],
-//                 tech: [
-//                   `GPA: ${selectedEdu.cgpa || 'N/A'}`,
-//                   selectedEdu.major || "General Engineering",
-//                   selectedEdu.location || "Remote",
-//                   selectedEdu.year || "Ongoing"
-//                 ].filter(Boolean),
-//                 roadmap: ["Academic Curriculum", "Key Projects", "Research & Achievements"]
-//               }} 
-//               onClose={() => setSelectedEdu(null)} 
-//             />
-//           )}
-//       </AnimatePresence>
-//     </section>
-//   );
-// };
-
-// export default Education;
-
-
-
-
-
-
-
-
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion'; // Added motion here
+import React, { useState, useRef } from 'react'; // Added useRef
+import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion'; 
 import SectionHeader from '../components/SectionHeader';
 import EducationCard from '../components/EducationCard';
 import DetailedModal from '../components/DetailedModal';
 
-const Education = ({ education = [], skills = [] }) => { // Added skills prop
+const Education = ({ education = [], skills = [] }) => {
   const [selectedEdu, setSelectedEdu] = useState(null);
-  
-  // Added states for the game
   const [isHovered, setIsHovered] = useState(false);
   const [activeSkill, setActiveSkill] = useState(null);
 
+  // --- NIGHT EFFECT LOGIC ---
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const springX = useSpring(mouseX, { stiffness: 40, damping: 25 });
+  const springY = useSpring(mouseY, { stiffness: 40, damping: 25 });
+
+  const starMoveX = useTransform(springX, [0, 1920], [15, -15]);
+  const starMoveY = useTransform(springY, [0, 1080], [15, -15]);
+
+  const handleMouseMove = (e) => {
+    mouseX.set(e.clientX);
+    mouseY.set(e.clientY);
+  };
+
+  const [stars] = useState(() => 
+    Array.from({ length: 100 }, () => ({
+      top: `${Math.random() * 100}%`,
+      left: `${Math.random() * 100}%`,
+      size: Math.random() * 1.5 + 0.5,
+      duration: Math.random() * 4 + 2,
+    }))
+  );
+
   return (
-    <section id="education" className="pt-0 pb-24 bg-slate-950 relative overflow-hidden">
+    <section 
+      id="education" 
+      onMouseMove={handleMouseMove} // Added mouse tracking
+      className="pt-0 pb-24 bg-transparent relative overflow-hidden"
+    >
+      {/* --- NIGHT EFFECT LAYERS START --- */}
+      
+      {/* 1. ATMOSPHERIC GLOW (The "Purple Mist") */}
+      <div className="absolute inset-0 pointer-events-none opacity-30">
+        <div className="absolute top-1/2 left-1/4 w-[500px] h-[500px] bg-purple-900/40 rounded-full blur-[120px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-blue-900/20 rounded-full blur-[100px]" />
+      </div>
+
+      {/* 2. THE FLOATING STARFIELD */}
+      <motion.div 
+        style={{ x: starMoveX, y: starMoveY }}
+        className="absolute inset-0 pointer-events-none"
+      >
+        {stars.map((star, i) => (
+          <motion.div
+            key={i}
+            animate={{ opacity: [0.1, 0.7, 0.1], scale: [1, 1.2, 1] }}
+            transition={{ duration: star.duration, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute bg-white rounded-full"
+            style={{
+              top: star.top,
+              left: star.left,
+              width: star.size,
+              height: star.size,
+              boxShadow: '0 0 4px rgba(255, 255, 255, 0.8)'
+            }}
+          />
+        ))}
+      </motion.div>
+
+      {/* 3. THE CRISP MOON (Half Phase) */}
+<motion.div 
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 0.5 }}
+  whileHover={{ scale: 1.1, opacity: 0.8 }}
+  style={{ left: '65%', transform: 'translateX(-50%)' }} 
+  className="absolute top-10 w-35 h-35 rounded-full shadow-[-52px_0px_0_0_#cbd5e1] pointer-events-auto cursor-pointer filter blur-[0.5px] transition-all duration-500 hover:shadow-[-55px_0px_30px_0_rgba(203,213,225,0.4)]"
+/>
+      {/* --- NIGHT EFFECT LAYERS END --- */}
+
       <SectionHeader title="Education" moduleHex="0x03" />
       
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">
           {education.map((edu) => (
             <EducationCard 
@@ -87,26 +93,26 @@ const Education = ({ education = [], skills = [] }) => { // Added skills prop
         </div>
       </div>
 
-      {/* 2. THE INTERACTIVE SKILL-SCANNER GAME (Shifted from Experience) */}
-      <div className="relative mt-0 mb-10 w-full overflow-visible">
+      {/* 2. THE INTERACTIVE SKILL-SCANNER GAME */}
+      <div className="relative z-10 mt-0 mb-10 w-full overflow-visible">
         <div className="max-w-7xl mx-auto px-6 mb-6 flex justify-between items-end font-mono">
           <div className="flex flex-col gap-1">
-            <span className="text-[10px] text-blue-500/40 tracking-[0.4em] uppercase">Tactical_Overlay_v4.2</span>
+            <span className="text-[10px] text-purple-300 tracking-[0.4em] uppercase">Tactical_Overlay_v4.2</span>
             <div className="flex items-center gap-3">
               <div className={`w-2 h-2 rounded-full ${isHovered ? 'bg-green-500 animate-pulse' : 'bg-red-500'}`} />
-              <span className="text-xs text-slate-400 tracking-widest">
+              <span className=" text-xs text-slate-400 tracking-widest">
                 {isHovered ? "TARGET_LOCKED" : "SCANNING_SIGNAL..."}
               </span>
             </div>
           </div>
-          <div className="text-[10px] text-slate-600 text-right hidden md:block">
+          <div className="text-[10px] text-purple-200 text-right hidden md:block">
             COORDINATES: [45.5017° N, 73.5673° W]<br />
             DECRYPT_STRENGTH: 94.2%
           </div>
         </div>
 
         <div
-          className="relative py-12 bg-slate-900/30 border-y border-blue-500/10 backdrop-blur-md overflow-hidden cursor-crosshair"
+          className="relative py-12 bg-purple-950/20 border-y border-purple-500/20 backdrop-blur-md overflow-hidden cursor-crosshair"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => {
             setIsHovered(false);
@@ -116,7 +122,7 @@ const Education = ({ education = [], skills = [] }) => { // Added skills prop
           <motion.div
             animate={{ x: ["-100%", "200%"] }}
             transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-            className="absolute inset-y-0 w-[1px] bg-gradient-to-b from-transparent via-blue-400 to-transparent shadow-[0_0_15px_rgba(59,130,246,0.5)] z-30"
+            className="absolute inset-y-0 w-[1px] bg-gradient-to-b from-transparent via-purple-400 to-transparent shadow-[0_0_15px_rgba(139,92,246,0.5)] z-30"
           />
 
           <motion.div
@@ -132,19 +138,19 @@ const Education = ({ education = [], skills = [] }) => { // Added skills prop
                     onMouseEnter={() => setActiveSkill(skill.name)}
                     className="relative flex flex-col items-center group/node"
                   >
-                    <span className="text-[10px] font-mono text-blue-500/40 mb-2">0x0{i}</span>
+                    <span className="text-[10px] font-mono text-purple-500/40 mb-2">0x0{i}</span>
                     <div className="relative">
-                      <span className="text-5xl font-black font-mono tracking-tighter text-white/10 group-hover/node:text-blue-500 transition-colors duration-300">
+                      <span className="text-5xl font-black font-mono tracking-tighter text-white/10 group-hover/node:text-purple-500 transition-colors duration-300">
                         {activeSkill === skill.name ? skill.name : skill.name.replace(/[aeiou]/gi, 'X')}
                       </span>
-                      <div className="absolute -inset-4 border-x border-blue-500/0 group-hover/node:border-blue-500/50 group-hover/node:scale-110 transition-all duration-300" />
+                      <div className="absolute -inset-4 border-x border-purple-500/0 group-hover/node:border-purple-500/50 group-hover/node:scale-110 transition-all duration-300" />
                     </div>
-                    <div className="w-full h-[2px] bg-slate-800 mt-4 relative overflow-hidden">
+                    <div className="w-full h-[2px] bg-white/5 mt-4 relative overflow-hidden">
                       <motion.div
                         initial={{ x: "-100%" }}
                         whileHover={{ x: "0%" }}
                         transition={{ duration: 0.5 }}
-                        className="absolute inset-0 bg-blue-500 shadow-[0_0_10px_#3b82f6]"
+                        className="absolute inset-0 bg-purple-500 shadow-[0_0_10px_#8b5cf6]"
                       />
                     </div>
                   </motion.div>
@@ -155,9 +161,9 @@ const Education = ({ education = [], skills = [] }) => { // Added skills prop
         </div>
 
         <div className="max-w-7xl mx-auto px-6 mt-8 opacity-20 flex justify-between items-center">
-          <div className="h-[1px] w-1/4 bg-gradient-to-r from-blue-500 to-transparent" />
-          <span className="font-mono text-[8px] tracking-[1em] text-slate-400 uppercase">Interactive_Skill_Core_v2</span>
-          <div className="h-[1px] w-1/4 bg-gradient-to-l from-blue-500 to-transparent" />
+          <div className="h-[1px] w-1/4 bg-gradient-to-r from-purple-500 to-transparent" />
+          <span className="font-mono text-[8px] tracking-[1em] text-purple-300/50 uppercase">Interactive_Skill_Core_v2</span>
+          <div className="h-[1px] w-1/4 bg-gradient-to-l from-purple-500 to-transparent" />
         </div>
       </div>
 
