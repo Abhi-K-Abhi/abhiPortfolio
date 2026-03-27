@@ -75,10 +75,10 @@ async def get_projects():
         "tech": [
             "NEAT_ALGORITHM",
             "PYTHON",
-            "NEURAL_NETWORKS",
-            "GENETIC_PROGRAMMING",
             "PYGAME",
-            "MATPLOTLIB"
+            "GENETIC_PROGRAMMING",
+            "MATPLOTLIB",
+            "NEURAL_NETWORKS",
         ],
         "video_url": "https://www.youtube.com/embed/your-ai-demo", 
         "github_url": "https://github.com/Abhi-K-Abhi/FlappyBird_Evolutionary-AI",
@@ -139,8 +139,8 @@ async def get_projects():
             "REACT.JS",
             "NODE.JS",
             "POSTGRESQL",
-            "STRIPE_API",
             "RBAC_SECURITY",
+            "STRIPE_API",
             "REDIS"
         ],
         "video_url": "https://www.youtube.com/embed/le-gym-demo",
@@ -200,11 +200,11 @@ async def get_projects():
         "category": "Systems Programming & Simulation",
         "tech": [
             "PYTHON",
-            "PYQT5",
+            "PYQTGraph",
             "MATPLOTLIB",
             "NUMPY",
             "PANDAS",
-            "ALGORITHM_ANALYSIS"
+            "OS_ALGORITHM_ANALYSIS"
         ],
         "video_url": "https://www.youtube.com/embed/os-sim-demo",
         "github_url": "https://github.com/Abhi-K-Abhi/OS-Scheduler-Sim",
@@ -262,12 +262,12 @@ async def get_projects():
         "title": "Enterprise Canteen System",
         "category": "Full-Stack & Enterprise Architecture",
         "tech": [
-            "JAVA_SPRING_BOOT",
+            "JAVA",
             "REACT.JS",
             "POSTGRESQL",
             "DOCKER",
-            "CRON_SCHEDULING",
             "REST_API",
+            "CRON_SCHEDULING",
             "GitHub"
         ],
         "video_url": "https://www.youtube.com/embed/your-canteen-demo", 
@@ -326,7 +326,7 @@ async def get_projects():
         "title": "Unified Workspace Connector",
         "category": "SaaS Orchestration & API Middleware",
         "tech": [
-            "PYTHON_FASTAPI",
+            "PYTHON",
             "REACT.JS",
             "OAUTH2.0",
             "PALLEN_UI",
@@ -391,7 +391,6 @@ async def get_projects():
         "tech": [
             "PYTHON_DJANGO",
             "REACT.JS",
-            "DJANGO_REST_FRAMEWORK",
             "WEBSOCKETS",
             "JWT_AUTH",
             "POSTGRESQL"
