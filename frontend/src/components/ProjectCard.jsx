@@ -67,27 +67,26 @@ const ProjectCard = ({ project, onOpen }) => {
     >
       {/* HUD Bracket */}
       <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-purple-500/30 rounded-tl-sm pointer-events-none" />
-
       {/* Identity Row */}
       <div className="relative z-10 flex items-center justify-between w-full mb-4">
         <div className="flex items-center gap-2">
-          <div className="px-2 py-0.5 bg-purple-500/10 border border-purple-500/20 rounded text-[9px] font-mono text-purple-300 uppercase">
+          <div className="px-2 py-1 bg-purple-500/10 border border-purple-500/20 rounded text-[10px] font-mono text-purple-300 uppercase">
             ID: {String(project.id).padStart(2, '0')}
           </div>
-          <span className="text-purple-400/50 font-mono text-[8px] tracking-widest uppercase">
-            {project.category?.split(' ')[0] || "SYSTEM"}
+          <span className="text-purple-400/90 font-mono text-[12px] tracking-widest uppercase">
+          {project.category?.split(' ')[0] || "SYSTEM"}
           </span>
         </div>
       </div>
 
       {/* Content */}
       <div className="relative z-10 flex-1">
-        <h3 className="text-lg font-black text-purple-100 uppercase tracking-tight leading-tight mb-2">
+        <h3 className="text-lg font-black text-purple-200 uppercase tracking-tight leading-tight mb-2">
           {project.title}
         </h3>
         <div className="flex flex-wrap gap-2">
-          {project.tech?.slice(0, 2).map((t, i) => (
-            <span key={i} className="text-[9px] font-mono text-purple-300/60 uppercase">
+          {project.tech?.slice(0, 5).map((t, i) => (
+            <span key={i} className="text-[12px] text-bold font-mono text-purple-300/70 uppercase">
               // {t.replace('_', ' ')}
             </span>
           ))}
