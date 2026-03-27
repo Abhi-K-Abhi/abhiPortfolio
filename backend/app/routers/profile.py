@@ -16,7 +16,7 @@ async def get_profile():
                 "uni": "Concordia University",
                 "year": "2023 - 2025",
                 "location": "Montreal, QC",
-                "cgpa": "3.2 / 4.0",
+                "cgpa": "3.23 / 4.00",
                 "details": [
                     "Specialized in Cloud Computing and Advanced Software Architecture.",
                     "Focusing on Distributed Systems and AI-driven defect detection research.",
@@ -30,7 +30,7 @@ async def get_profile():
                 "uni": "Indus University",
                 "year": "2019 - 2023",
                 "location": "Gujarat, India",
-                "cgpa": "9.85 / 10.0",
+                "cgpa": "4.00/4.00",
                 "details": [
                     "Achieved a near-perfect CGPA of 9.85/10.0.",
                     "Led the Google Developer Student Club (GDSC) as Chapter Lead.",
@@ -41,10 +41,10 @@ async def get_profile():
                 "id": "edu-hsc",
                 "degree": "Higher Secondary (HSC)",
                 "major": "Science (PCM)",
-                "uni": "GSHSEB Board",
+                "uni": "Gujarat Board",
                 "year": "2019",
                 "location": "Gujarat, India",
-                "cgpa": "85%",
+                "cgpa": "98.69",
                 "details": [
                     "Focused on Physics, Chemistry, and Advanced Mathematics.",
                     "Developed foundational analytical and problem-solving skills."
@@ -54,10 +54,10 @@ async def get_profile():
                 "id": "edu-ssc",
                 "degree": "Secondary School (SSC)",
                 "major": "General Science",
-                "uni": "GSHSEB Board",
+                "uni": "Gujarat Board",
                 "year": "2017",
                 "location": "Gujarat, India",
-                "cgpa": "91%",
+                "cgpa": "99.91",
                 "details": [
                     "Graduated with distinction.",
                     "Recognized for excellence in Mathematics and Science."
