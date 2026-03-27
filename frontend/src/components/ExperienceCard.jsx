@@ -8,8 +8,8 @@ const ExperienceCard = ({ exp, onOpen }) => {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      whileHover={{ scale: 1.01, backgroundColor: "rgba(11, 4, 16, 0.6)" }} 
-      transition={{ type: "spring", stiffness: 400, damping: 25 }}
+      whileHover={{ y:-10, scale: 1.01, backgroundColor: "rgba(11, 4, 16, 0.6)" }} 
+      transition={{ type: "spring", stiffness: 500, damping: 30, mass: 0.5 }}
       // Added relative and pr-12 to ensure the right side button never hits the edge
       className="group relative w-full bg-[#150123]/60 border border-purple-500/20 rounded-tr-3xl rounded-bl-3xl p-6 md:p-8 md:pr-12 cursor-pointer overflow-hidden backdrop-blur-xl min-h-[160px] flex items-center transition-all hover:border-purple-400/50"
     >
