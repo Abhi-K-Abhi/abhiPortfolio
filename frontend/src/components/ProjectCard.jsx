@@ -74,7 +74,7 @@ const ProjectCard = ({ project, onOpen }) => {
             ID: {String(project.id).padStart(2, '0')}
           </div>
           <span className="text-purple-400/90 font-mono text-[12px] tracking-widest uppercase">
-          {project.category?.split(' ')[0] || "SYSTEM"}
+          {project.category?.split(' ').slice(0, 4).join(' ') || "SYSTEM"}
           </span>
         </div>
       </div>
@@ -95,11 +95,16 @@ const ProjectCard = ({ project, onOpen }) => {
 
       {/* Action Row */}
       <div className="relative z-10 flex items-end justify-between mt-4">
-        <div className="text-[8px] font-mono text-purple-400/40 uppercase tracking-[0.2em]">
+        <div className="text-[10px] font-mono text-purple-400/60 uppercase tracking-[0.2em]">
           DATA_LOG_0{project.id}
         </div>
-        <div className="w-9 h-9 rounded-full border border-purple-500/30 flex items-center justify-center bg-purple-500/5 group-hover:bg-purple-500/20 transition-all">
-          <span className="text-purple-200 text-sm">→</span>
+        <div className="flex items-center pl-0 gap-4 group/btn">
+          <span className="hidden xl:block text-purple-300 text-[10px] font-bold font-mono tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-all duration-300">
+            EXPAND_LOG
+          </span>
+          <div className="w-10 h-10 md:w-9 md:h-9 rounded-full border border-purple-500/30 flex items-center justify-center bg-purple-500/5 group-hover:border-purple-300 group-hover:bg-purple-500/20 transition-all shadow-[0_0_15px_rgba(168,85,247,0.1)]">
+              <span className="group-hover:translate-x-1 transition-transform duration-300 text-purple-200 text-lg">→</span>
+          </div>
         </div>
       </div>
 

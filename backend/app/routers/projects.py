@@ -8,7 +8,7 @@ async def get_projects():
         {
         "id": 1,
         "title": "CI/CD AI Risk Engine",
-        "category": "Artificial Intelligence & Machine Learning",
+        "category": "AL & Machine Learning",
         "tech": [
             "HYBRID_AI(ML+LLM)",
             "PYTHON",
@@ -197,7 +197,7 @@ async def get_projects():
         {
         "id": 4,
         "title": "OS Performance Analytics Suite",
-        "category": "Systems Programming & Simulation",
+        "category": "OS Programming & Simulation",
         "tech": [
             "PYTHON",
             "PYQTGraph",
@@ -260,7 +260,7 @@ async def get_projects():
         {
         "id": 5,
         "title": "Enterprise Canteen System",
-        "category": "Full-Stack & Enterprise Architecture",
+        "category": "An Enterprise Architecture",
         "tech": [
             "JAVA",
             "REACT.JS",
@@ -324,7 +324,7 @@ async def get_projects():
         {
         "id": 6,
         "title": "Unified Workspace Connector",
-        "category": "SaaS Orchestration & API Middleware",
+        "category": "SaaS & API Middleware",
         "tech": [
             "PYTHON",
             "REACT.JS",
@@ -387,7 +387,7 @@ async def get_projects():
         {
         "id": 7,
         "title": "Real-time Auction Engine",
-        "category": "High-Concurrency Backend Architecture",
+        "category": "Full-Srtack RBAC Architecture",
         "tech": [
             "PYTHON_DJANGO",
             "REACT.JS",
