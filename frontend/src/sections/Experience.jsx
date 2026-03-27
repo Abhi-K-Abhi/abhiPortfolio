@@ -35,7 +35,7 @@ const Experience = ({ experiences = []}) => {
     <section 
       id="experience" 
       onMouseMove={handleMouseMove}
-      className="pt-0 pb-24 bg-transparent relative overflow-hidden" // bg-transparent is vital
+      className="relative -mt-[1px] pt-0 pb-24 bg-transparent relative overflow-hidden" // bg-transparent is vital
     >
       {/* --- NIGHT EFFECT LAYERS START --- */}
       

@@ -92,7 +92,7 @@ const Education = ({ education = [], skills = [] }) => {
       {/* --- NIGHT EFFECT LAYERS END --- */}
       <SectionHeader title="Education" moduleHex="0x03" />
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-65">
           {education.map((edu) => (
             <EducationCard 
               key={edu.id} 
