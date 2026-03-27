@@ -28,8 +28,8 @@ async def get_profile():
                 "degree": "Bachelor of Technology",
                 "major": "Computer Science Engineering",
                 "uni": "Indus University",
-                "year": "2018 - 2022",
-                "location": "Ahmedabad, India",
+                "year": "2019 - 2023",
+                "location": "Gujarat, India",
                 "cgpa": "9.85 / 10.0",
                 "details": [
                     "Achieved a near-perfect CGPA of 9.85/10.0.",
@@ -42,7 +42,7 @@ async def get_profile():
                 "degree": "Higher Secondary (HSC)",
                 "major": "Science (PCM)",
                 "uni": "GSHSEB Board",
-                "year": "2016 - 2018",
+                "year": "2019",
                 "location": "Gujarat, India",
                 "cgpa": "85%",
                 "details": [
@@ -55,7 +55,7 @@ async def get_profile():
                 "degree": "Secondary School (SSC)",
                 "major": "General Science",
                 "uni": "GSHSEB Board",
-                "year": "2014 - 2016",
+                "year": "2017",
                 "location": "Gujarat, India",
                 "cgpa": "91%",
                 "details": [
