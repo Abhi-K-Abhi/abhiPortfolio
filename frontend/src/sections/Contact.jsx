@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring, useMotionValue, AnimatePresence } from 'framer-motion';
 
 const Contact = ({ contact }) => {
@@ -10,8 +10,19 @@ const Contact = ({ contact }) => {
   const [frequency, setFrequency] = useState(0); 
   const [isSending, setIsSending] = useState(false);
   const [isSent, setIsSent] = useState(false);
+  
+  // NEW: Random Target State
+  const [targetFreq, setTargetFreq] = useState(88); 
 
-  const isTuned = frequency > 80 && frequency < 95;
+  // NEW: Generate random frequency on mount
+  useEffect(() => {
+    // Generates a target between 15 and 85 to ensure the range (target-5 to target+5) stays within 0-100
+    const random = Math.floor(Math.random() * 70) + 15; 
+    setTargetFreq(random);
+  }, []);
+
+  // UPDATED: Check tuned status based on random target (+/- 2 range for a "tight" feel)
+  const isTuned = frequency >= targetFreq - 2 && frequency <= targetFreq + 2;
 
   // --- MOUSE INTERACTION ---
   const mouseX = useMotionValue(0);
@@ -41,6 +52,7 @@ const Contact = ({ contact }) => {
     setTimeout(() => {
       setIsSending(false);
       setIsSent(true);
+      setFormState({ name: '', email: '', message: '' }); 
     }, 1200);
   };
 
@@ -104,17 +116,16 @@ const Contact = ({ contact }) => {
             <div className="space-y-6">
               <p className="text-purple-200 font-mono uppercase tracking-widest text-xs">Available for new opportunities</p>
               <div className="flex flex-col gap-6">
-                <button onClick={copyEmail} className="text-2xl md:text-4xl font-bold text-slate-100 hover:text-purple-400 transition-all text-left flex items-center gap-4 group">
+                <button onClick={copyEmail} className="text-2xl md:text-4xl font-bold text-slate-100 hover:text-purple-200 transition-all text-left flex items-center gap-4 group">
                   {contact.email} 
                   {copied && <span className="text-sm text-green-400 font-mono animate-bounce">[COPIED!]</span>}
                 </button>
 
                 <div className="flex gap-4">
-                  {/* ORIGINAL SHAPE BUTTONS RESTORED */}
-                  <button onClick={copyEmail} className="px-8 py-3 bg-purple-950/30 border border-purple-500/20 backdrop-blur-md text-slate-300 font-mono text-[10px] tracking-widest rounded-full hover:bg-purple-700 transition-all">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="inline mr-2"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-                    {copied ? "COPIED" : ""}
-                  </button>
+                   <button onClick={copyEmail} className="px-8 py-3 bg-purple-950/30 border border-purple-500/20 backdrop-blur-md text-slate-300 font-mono text-[10px] tracking-widest rounded-full hover:bg-purple-700 transition-all">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="inline mr-0"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                     {copied ? "" : ""}
+                   </button>
                   
                    <a href={`mailto:${contact.email}`} className="p-3 bg-purple-900 text-white rounded-full hover:bg-purple-700 shadow-lg shadow-purple-900/40 transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
@@ -131,12 +142,13 @@ const Contact = ({ contact }) => {
                 <motion.form 
                   key="form"
                   onSubmit={handleLaunch}
-                  animate={isSending ? { scale: 0, x: 500, y: -400, opacity: 0, rotate: 20 } : { scale: 1, x: 0, y: 0, opacity: 1 }}
+                  animate={isSending ? { scale: 0, x: 800, y: -100, opacity: 0, rotate: 20 } : { scale: 1, x: 0, y: 0, opacity: 1 }}
                   transition={{ duration: 1.2, ease: "anticipate" }}
                   className="space-y-4 w-full bg-black/40 p-10 rounded-[2rem] backdrop-blur-2xl border border-white/5 shadow-2xl"
                 >
+                  {/* UPDATED: Displays range instead of a single number */}
                   <p className="text-[11px] font-mono text-purple-300/60 mb-2">
-                    [ABHI]: MATCH FREQUENCY TO 85-95MHz TO ENABLE GRAVITY LAUNCH.
+                    [ABHI]: MATCH FREQUENCY TO <span className="text-white font-bold">{targetFreq - 5}-{targetFreq + 5}MHz</span> TO ENABLE GRAVITY LAUNCH.
                   </p>
                   
                   <div className="grid md:grid-cols-2 gap-4">
@@ -153,7 +165,7 @@ const Contact = ({ contact }) => {
                     </div>
                     <input 
                         type="range" min="0" max="100" value={frequency}
-                        onChange={(e) => setFrequency(e.target.value)}
+                        onChange={(e) => setFrequency(parseInt(e.target.value))}
                         className="w-full h-1 bg-white/10 rounded-lg appearance-none cursor-pointer accent-purple-500"
                     />
                   </div>
@@ -169,8 +181,8 @@ const Contact = ({ contact }) => {
               ) : (
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="p-10 bg-black/60 border border-purple-500/20 rounded-[2rem] backdrop-blur-xl font-mono text-xs text-purple-300">
                   <p className="text-green-400 mb-2">{">"} UPLINK_SUCCESSFUL</p>
-                  <p className="text-white font-bold tracking-widest uppercase">Your data has been captured.</p>
-                  <button onClick={() => {setIsSent(false); setFrequency(0);}} className="mt-8 text-purple-500 hover:text-white underline">[NEW TRANSMISSION]</button>
+                  <p className="text-white font-bold tracking-widest uppercase">The Lunar Receiver has captured your data.</p>
+                  <button onClick={() => {setIsSent(false); setFrequency(0); setTargetFreq(Math.floor(Math.random() * 70) + 15);}} className="mt-8 text-purple-500 hover:text-white underline">[NEW TRANSMISSION]</button>
                 </motion.div>
               )}
             </AnimatePresence>
