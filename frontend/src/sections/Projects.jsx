@@ -98,12 +98,11 @@ const Projects = ({ projects = [] }) => {
       <div className="max-w-7xl mx-auto px-6 relative z-10 mt-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {projects.map((project) => (
-            <ProjectCard 
-              key={project.id} 
-              project={project} 
-              // CHANGE THIS LINE: Match the prop name 'onOpen' used in ProjectCard
-              onOpen={() => setSelectedProject(project)} 
-            />
+          <ProjectCard 
+            key={project.id} 
+            project={project} 
+            onOpen={() => setSelectedProject(project)} // This is perfect
+          />
           ))}
         </div>
       </div>
@@ -112,6 +111,7 @@ const Projects = ({ projects = [] }) => {
       <AnimatePresence>
         {selectedProject && (
           <DetailedModal 
+            layoutId={`card-${selectedProject.id}`} 
             item={selectedProject} 
             onClose={() => setSelectedProject(null)} 
           />

@@ -98,8 +98,8 @@ const EducationCard = ({ edu, onOpen }) => {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      whileHover={{ scale: 1.005, backgroundColor: "rgba(11, 4, 16, 0.6)" }} 
-      transition={{ type: "spring", stiffness: 400, damping: 25 }}
+      whileHover={{ y: -10, scale: 1.005, backgroundColor: "rgba(11, 4, 16, 0.6)" }} 
+      transition={{ type: "spring", stiffness: 500, damping: 30, mass: 0.5 }}
       // SHAPE CHANGE: Replaced rounded-2xl with rounded-tr-3xl and rounded-bl-3xl
       // Keeping pr-[10px] for your arrow margin
       className="group relative w-full bg-[#150123]/60 border border-purple-500/20 rounded-tr-3xl rounded-bl-3xl p-6 md:p-8 pr-[10px] cursor-pointer overflow-hidden backdrop-blur-md min-h-[180px] flex flex-row items-center transition-all hover:border-purple-400/50"
