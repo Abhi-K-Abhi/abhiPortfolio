@@ -104,13 +104,37 @@ const Contact = ({ contact }) => {
 
       {/* 4. CONTENT LAYER */}
       <div className="relative z-10 flex-grow flex items-center justify-center px-6">
-        <div className="max-w-7xl w-full grid lg:grid-cols-2 gap-20 items-center">
+        <div className="max-w-7xl w-full grid lg:grid-cols-2 gap-10 items-center">
           
           <div className="space-y-8">
             <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}>
-              <h2 className="text-7xl md:text-8xl font-black tracking-tighter leading-none text-white">
-                LET'S <br /> <span className="text-purple-600">CONNECT.</span>
-              </h2>
+            <h2 className="text-7xl md:text-8xl font-black tracking-tighter leading-none uppercase relative">
+              {/* Layer 1: The "Dotted" White Text */}
+              <span 
+                className="text-purple-200 block"
+                style={{
+                  maskImage: 'radial-gradient(circle, black 35%, transparent 75%)',
+                  maskSize: '4.5px 4.5px', // This creates the "Nothing" dot grid
+                  WebkitMaskImage: 'radial-gradient(circle, black 35%, transparent 75%)',
+                  WebkitMaskSize: '4.5px 4.5px'
+                }}
+              >
+                LET'S
+              </span>
+
+              {/* Layer 2: The "Dotted" Purple Text */}
+              <span 
+                className="text-purple-600 block mt-2"
+                style={{
+                  maskImage: 'radial-gradient(circle, black 35%, transparent 75%)',
+                  maskSize: '4.5px 4.5px',
+                  WebkitMaskImage: 'radial-gradient(circle, black 35%, transparent 75%)',
+                  WebkitMaskSize: '4.5px 4.5px'
+                }}
+              >
+                CONNECT.
+              </span>
+            </h2>
             </motion.div>
             
             <div className="space-y-6">
@@ -147,8 +171,8 @@ const Contact = ({ contact }) => {
                   className="space-y-4 w-full bg-black/40 p-10 rounded-[2rem] backdrop-blur-2xl border border-white/5 shadow-2xl"
                 >
                   {/* UPDATED: Displays range instead of a single number */}
-                  <p className="text-[11px] font-mono text-purple-300/60 mb-2">
-                    [ABHI]: MATCH FREQUENCY TO <span className="text-white font-bold">{targetFreq - 5}-{targetFreq + 5}MHz</span> TO ENABLE GRAVITY LAUNCH.
+                  <p className="text-[12px] font-mono text-purple-300/60 mb-2">
+                    [ABHI]: MATCH FREQUENCY TO <span className="text-purple-300 font-bold ">{targetFreq - 5}-{targetFreq + 5}MHz</span> TO ENABLE GRAVITY LAUNCH.
                   </p>
                   
                   <div className="grid md:grid-cols-2 gap-4">

@@ -2,8 +2,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* --- 1. GLOBAL BASE STYLES --- */
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap');/* --- 1. GLOBAL BASE STYLES --- */
 @layer base {
   :root {
     --midnight-violet: #150123;
